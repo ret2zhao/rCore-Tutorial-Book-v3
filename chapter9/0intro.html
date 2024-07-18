@@ -1,42 +1,769 @@
+<!doctype html>
+<html class="no-js" lang="zh_CN">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="I/O设备" href="1io-interface.html" /><link rel="prev" title="第九章：I/O设备管理" href="index.html" />
 
-
-<!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
-<head>
-  <meta charset="utf-8" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>引言 &mdash; rCore-Tutorial-Book-v3 3.6.0-alpha.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
+    <meta name="generator" content="sphinx-4.3.2, furo 2022.06.21"/>
+        <title>引言 - rCore-Tutorial-Book-v3 3.6.0-alpha.1 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/my_style.css" />
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script kind="utterances">
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">rCore-Tutorial-Book-v3 3.6.0-alpha.1 文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">rCore-Tutorial-Book-v3 3.6.0-alpha.1 文档</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=搜索 name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Part1 - Just do it!</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter0/index.html">第零章：操作系统概述</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter0/0intro.html">引言</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/1what-is-os.html">什么是操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/2os-interface.html">操作系统的系统调用接口</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/3os-hw-abstract.html">操作系统抽象</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/4os-features.html">操作系统的特征</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/5setup-devel-env.html">实验环境配置</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/7exercise.html">练习</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/8answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter1/index.html">第一章：应用程序与基本执行环境</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter1/0intro.html">引言</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/1app-ee-platform.html">应用程序执行环境与平台支持</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/2remove-std.html">移除标准库依赖</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/3first-instruction-in-kernel1.html">内核第一条指令（基础篇）</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/4first-instruction-in-kernel2.html">内核第一条指令（实践篇）</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/5support-func-call.html">为内核支持函数调用</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/6print-and-shutdown-based-on-sbi.html">基于 SBI 服务完成输出和关机</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/7exercise.html">练习</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/8answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter2/index.html">第二章：批处理系统</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter2/0intro.html">引言</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter2/1rv-privilege.html">特权级机制</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter2/2application.html">实现应用程序</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter2/3batch-system.html">实现批处理操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter2/4trap-handling.html">实现特权级的切换</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter2/5exercise.html">练习</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter2/6answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter3/index.html">第三章：多道程序与分时多任务</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter3/0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter3/1multi-loader.html">多道程序放置与加载</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter3/2task-switching.html">任务切换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter3/3multiprogramming.html">多道程序与协作式调度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter3/4time-sharing-system.html">分时多任务系统与抢占式调度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter3/5exercise.html">练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter3/6answer.html">练习参考答案</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter4/index.html">第四章：地址空间</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/1rust-dynamic-allocation.html">Rust 中的动态内存分配</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/2address-space.html">地址空间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/3sv39-implementation-1.html">SV39 多级页表的硬件机制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/4sv39-implementation-2.html">管理 SV39 多级页表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/5kernel-app-spaces.html">内核与应用的地址空间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/6multitasking-based-on-as.html">基于地址空间的分时多任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/7more-as.html">超越物理内存的地址空间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/8exercise.html">练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/9answer.html">练习参考答案</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter5/index.html">第五章：进程</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/1process.html">进程概念及重要系统调用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/2core-data-structures.html">进程管理的核心数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/3implement-process-mechanism.html">进程管理机制的设计实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/4scheduling.html">进程调度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/5exercise.html">练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/6answer.html">练习参考答案</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter6/index.html">第六章：文件系统</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter6/0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter6/1fs-interface.html">文件系统接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter6/2fs-implementation.html">简易文件系统 easy-fs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter6/3using-easy-fs-in-kernel.html">在内核中接入 easy-fs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter6/4exercise.html">练习</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter6/5answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter7/index.html">第七章：进程间通信与 I/O 重定向</a><input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/1file-descriptor.html">基于文件的标准输入/输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/2pipe.html">管道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/3cmdargs-and-redirection.html">命令行参数与标准 I/O 重定向</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/4signal.html">信号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/5exercise.html">练习</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter7/6answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter8/index.html">第八章：并发</a><input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/1thread.html">用户态的线程管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/1thread-kernel.html">内核态的线程管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/2lock.html">互斥锁</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/3semaphore.html">信号量机制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/4condition-variable.html">条件变量机制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/5concurrency-problem.html">并发中的问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/6exercise.html">练习</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter8/7answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">第九章：I/O设备管理</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1io-interface.html">I/O设备</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2device-driver-0.html">外设平台</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2device-driver-1.html">串口驱动程序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2device-driver-2.html">virtio设备驱动程序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2device-driver-3.html">virtio_blk块设备驱动程序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2device-driver-4.html">virtio_gpu设备驱动程序</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="4exercise.html">练习</a><input class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="5answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" role="switch" type="checkbox"/><label for="toctree-checkbox-36"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../final-lab.html">综合练习</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix-a/index.html">附录 A：Rust 系统编程入门</a><input class="toctree-checkbox" id="toctree-checkbox-37" name="toctree-checkbox-37" role="switch" type="checkbox"/><label for="toctree-checkbox-37"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix-b/index.html">附录 B：常见工具的使用方法</a><input class="toctree-checkbox" id="toctree-checkbox-38" name="toctree-checkbox-38" role="switch" type="checkbox"/><label for="toctree-checkbox-38"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix-c/index.html">附录 C：深入机器模式：RustSBI</a><input class="toctree-checkbox" id="toctree-checkbox-39" name="toctree-checkbox-39" role="switch" type="checkbox"/><label for="toctree-checkbox-39"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix-d/index.html">附录 D：RISC-V相关信息</a><input class="toctree-checkbox" id="toctree-checkbox-40" name="toctree-checkbox-40" role="switch" type="checkbox"/><label for="toctree-checkbox-40"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../appendix-d/1asm.html">RISCV 汇编相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix-d/2rv.html">RISCV 硬件相关</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix-e/index.html">附录 E：操作系统进一步介绍</a><input class="toctree-checkbox" id="toctree-checkbox-41" name="toctree-checkbox-41" role="switch" type="checkbox"/><label for="toctree-checkbox-41"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-f/index.html">附录 F：类 Peterson 算法的局限性和内存顺序</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../terminology.html">术语中英文对照表</a><input class="toctree-checkbox" id="toctree-checkbox-42" name="toctree-checkbox-42" role="switch" type="checkbox"/><label for="toctree-checkbox-42"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发注记</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../setup-sphinx.html">修改和构建本项目</a><input class="toctree-checkbox" id="toctree-checkbox-43" name="toctree-checkbox-43" role="switch" type="checkbox"/><label for="toctree-checkbox-43"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rest-example.html">reStructuredText 基本语法</a><input class="toctree-checkbox" id="toctree-checkbox-44" name="toctree-checkbox-44" role="switch" type="checkbox"/><label for="toctree-checkbox-44"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../log.html">更新日志</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <div class="section" id="id1">
+<h1>引言<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
+<div class="section" id="id2">
+<h2>本章导读<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+<p>上一章的 达科塔盗龙”操作系统和慈母龙操作系统已经具备了传统操作系统中的内在重要因素，如进程、文件、地址空间、进程间通信、线程并发执行、支持线程安全访问共享资源的同步互斥机制等，应用程序也能通过操作系统输入输出字符，读写在磁盘上的数据。不过与我们常见的操作系统（如Linux,Windows等）比起来，好像感知与交互的I/O能力还比较弱。</p>
+<p>终于到了I/O设备管理这一章了。人靠衣裳马靠鞍，如果操作系统不能把计算机的外设功能给发挥出来，那应用程序感知外在环境的能力和展示内在计算的能力都会大打折扣。比如基于中断和DMA机制的高性能I/O处理，图形化显示，键盘与鼠标输入等，这些操作系统新技能将在本章展现出来。所以本章要完成的操作系统的核心目标是： <strong>让应用能便捷地访问外设</strong> 。</p>
+<div class="admonition note" id="term-dma-concept">
+<p class="admonition-title">注解</p>
+<p>DMA机制</p>
+<p>DMA（Direct Memory Access）是一种用于在计算机系统中传输I/O数据的技术。它允许I/O设备通过DMA控制器直接将设备中的I/O数据读入内存或把内存中的数据写入I/O设备，而整个数据传输过程无需处理器的介入。这意味着处理器可以在DMA传输期间执行其他任务，从而提高系统的性能和效率。I/O设备通过DMA控制器访问的内存称为DMA内存。</p>
+</div>
+<div class="section" id="id3">
+<h3>以往操作系统对设备的访问<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h3>
+<p>其实在第一章就非常简单介绍了QEMU模拟的RISC-V 64计算机中存在的外设：UART、时钟、virtio-net/block/console/gpu等。并且LibOS模式的操作系统就已通过RustSBI间接地接触过串口设备了，即通过RustSBI提供的一个SBI调用 <code class="docutils literal notranslate"><span class="pre">SBI_CONSOLE_PUTCHAR</span></code> 来完成字符输出功能的。</p>
+<p>在第三章，为了能实现抢占式调度，引入了时钟这个外设，结合硬件中断机制，并通过SBI调用 <code class="docutils literal notranslate"><span class="pre">SBI_SET_TIMER</span></code> 来帮助操作系统在固定时间间隔内获得控制权。而到了第五章，我们通过另外一个SBI调用 <code class="docutils literal notranslate"><span class="pre">SBI_CONSOLE_GETCHAR</span></code> 来获得输入的字符能力。这时的操作系统就拥有了与使用者进行简单字符交互的能力了。</p>
+<p>后来在第六章又引入了另外一个外设virtio-block设备，即一个虚拟的磁盘设备。还通过这个存储设备完成了对数据的持久存储，并在其上实现了管理存储设备上持久性数据的文件系统。对virtio-block设备的I/O访问没有通过RustSBI来完成，而是直接调用了 <code class="docutils literal notranslate"><span class="pre">virtio_drivers</span></code> crate中的 <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 设备驱动程序来实现。但我们并没有深入分析这个设备驱动程序的具体实现。</p>
+<p>可以说在操作系统中，I/O设备管理无处不在，且与I/O设备相关的操作系统代码–设备驱动程序在整个操作系统中的代码量比例是最高的（Linux/Windows等都达到了75%以上），也是出错概率最大的地方。虽然前面章节的操作系统已经涉及了很多I/O设备访问的相关处理，但我们并没有对I/O设备进行比较全面的分析和讲解。这主要是由于各种I/O设备差异性比较大，操作系统很难像进程/地址空间/文件那样，对各种I/O设备建立一个一致通用的抽象和对应的解决方案。</p>
+<p>但I/O设备非常重要，由于各种I/O(输入输出)设备的存在才使得计算机的强大功能得以展现在大众面前，事实上对于各种I/O设备的高效管理是计算机系统操作系统能够在大众中普及的重要因素。比如对于手机而言，大众关注的不是CPU有多快，内存有多大，而是关注显示是否流畅，触摸是否敏捷这些外设带来的人机交互体验。而这些体验在很大程度上取决于操作系统对外设的管理与访问效率。</p>
+<p>另外，对I/O设备的管理体现了操作系统最底层的设计机制，如中断，并发，异步，缓冲，同步互斥等。这对上层的进程，地址空间，文件等有着深刻的影响。所以在设计和实现了进程，地址空间，文件这些经典的操作系统抽象概念后，我们需要再重新思考一下，具备多种I/O设备管理能力的操作系统应该如何设计，特别是是否能给I/O设备也建立一个操作系统抽象。如果同学带着这些问题来思考和实践，将会对操作系统有更全面的体会。</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p><strong>UNIX诞生是从磁盘驱动程序开始的</strong></p>
+<p>回顾UNIX诞生的历史，你会发现一个有趣的故事：贝尔实验室的Ken Tompson在退出Mulitics操作系统开发后，还是想做继续操作系统方面的探索。他先是给一台闲置的PDP-7计算机的磁盘驱动器写了一个包含磁盘调度算法的磁盘驱动程序，希望提高磁盘I/O读写速度。为了测试磁盘访问性能，Ken Tompson花了三周时间写了一个操作系统，这就是Unix的诞生。这说明是磁盘驱动程序促使了UNIX的诞生。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>设备驱动程序是操作系统的一部分？</p>
+<p>我们都知道计算机是由CPU、内存和I/O设备组成的。即使是图灵创造的图灵机这一理论模型，也有其必须存在的I/O设备：笔和纸。1946年出现的远古计算机ENIAC，都具有读卡器和打卡器来读入和输出穿孔卡片中的数据。当然，这些外设不需要额外编写软件，直接通过硬件电路就可以完成I/O操作了。但后续磁带和磁盘等外设的出现，使得需要通过软件来管理越来越复杂的外设功能了，这样设备驱动程序（Device Driver）就出现了，它甚至出现在操作系统之前，以子程序库的形式存在，以便于应用程序来访问硬件。</p>
+<p>随着计算机外部设备越来越多，越来越复杂，设备驱动程序在操作系统中的代码比重也越来越大。甚至某些操作系统的名称直接加入了外设名，如微软在 1981 年至 1995 年间主导了个人计算机市场的DOS操作系统的全称是“Disk Operating System”。1973 年，施乐 PARC 开发了Alto个人电脑，它是第一台具有图形用户界面(GUI) 的计算机，直接影响了苹果公司和微软公司设计的带图形界面的操作系统。微软后续开发的操作系统名称“Windows”也直接体现了图形显示设备（显卡）能够展示的抽象概念，显卡驱动和基于显卡驱动的图形界面子系统在Windows操作系统中始终处于非常重要的位置。</p>
+<p>目前评价操作系统被产业界接受的程度有一个公认的量化指标，该操作系统的设备驱动程序支持的外设种类和数量。量越大说明它在市场上的接受度就越高。正是由于操作系统能够访问和管理各种外设，才给了应用程序丰富多彩的功能。</p>
+</div>
+<p>本章的目标是深入理解I/O设备管理，并将站在I/O设备管理的角度来分析I/O设备的特征，操作系统与I/O设备的交互方式。接着会进一步通过串口，磁盘，图形显示等各种外设的具体实现来展现操作系统是如何管理I/O设备的，并展现设备驱动与操作系统内核其它重要部分的交互, 通过扩展操作系统的I/O能力，形成具有灵活感知和捕猎能力的侏罗猎龙 <a class="footnote-reference brackets" href="#juravenator" id="id4">1</a> 操作系统。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>实践体验<a class="headerlink" href="#id5" title="永久链接至标题">#</a></h2>
+<div class="section" id="id6">
+<h3>裸机设备驱动程序<a class="headerlink" href="#id6" title="永久链接至标题">#</a></h3>
+<p>获取代码：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rcore-os/virtio-drivers.git
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>virtio-drivers
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>examples/riscv
+</pre></div>
+</div>
+<p>在 qemu 模拟器上运行：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>make<span class="w"> </span>qemu
+<span class="go">... #可以看到测试用例发现并初始化和操作各个虚拟化设备的情况</span>
+<span class="go">[ INFO] Detected virtio MMIO device with vendor id 0x554D4551, device type Block, version Modern</span>
+<span class="go">[ INFO] Detected virtio MMIO device with vendor id 0x554D4551, device type GPU, version Modern</span>
+<span class="go">[ INFO] Detected virtio MMIO device with vendor id 0x554D4551, device type Input, version Modern</span>
+<span class="go">[ INFO] Detected virtio MMIO device with vendor id 0x554D4551, device type Network, version Modern</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/virtio-test-example2.png" id="virtio-test-example2"><img alt="../_images/virtio-test-example2.png" class="align-center" id="virtio-test-example2" src="../_images/virtio-test-example2.png" style="width: 385.5px; height: 244.2px;" /></a>
+<p>在这个测例中，可以看到对块设备（virtio-blk）、网络设备（virtio-net）、键盘鼠标类设备（virtio-input）、显示设备（virtio-gpu）的识别、初始化和初步的操作。</p>
+</div>
+<div class="section" id="id7">
+<h3>侏罗猎龙操作系统<a class="headerlink" href="#id7" title="永久链接至标题">#</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rcore-os/rCore-Tutorial-v3.git
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>rCore-Tutorial-v3
+<span class="gp">$ </span>git<span class="w"> </span>checkout<span class="w"> </span>ch9
+</pre></div>
+</div>
+<p>在 qemu 模拟器上运行：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>os
+<span class="gp">$ </span>make<span class="w"> </span>run<span class="w"> </span><span class="nv">GUI</span><span class="o">=</span>on
+<span class="go">&gt;&gt; gui_snake     #在OS启动后的shell界面中执行gui——snake游戏应用</span>
+</pre></div>
+</div>
+<p>在这个应用中，可以看到 <code class="docutils literal notranslate"><span class="pre">gui_snake</span></code> 图形应用通过操作系统提供的UART串口驱动和 <code class="docutils literal notranslate"><span class="pre">virtio-gui</span></code> 显示驱动提供的服务来实现的一个贪吃蛇交互式小游戏。下面是该应用的演示图：其中红色为贪吃蛇，黄色方块为食物。玩家可以使用wasd（分别表示上左下右）控制贪吃蛇的行进方向。由于控制是基于和前面章节一样的命令行标准输入实现的，在游玩的时候需要让焦点位于 user shell 命令行界面，才能成功将控制传递给应用程序。应用画面可以在另一个图形显示窗口看到。</p>
+<a class="reference internal image-reference" href="../_images/gui-snake.png" id="gui-snake"><img alt="../_images/gui-snake.png" class="align-center" id="gui-snake" src="../_images/gui-snake.png" style="width: 385.5px; height: 247.5px;" /></a>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>本章代码树<a class="headerlink" href="#id8" title="永久链接至标题">#</a></h2>
+<p>进一步增加了多种设备驱动程序的侏罗盗龙操作系统 – DeviceOS的总体结构如下图所示：</p>
+<a class="reference internal image-reference" href="../_images/device-os-detail.png" id="device-os-detail"><img alt="侏罗盗龙操作系统 -- DeviceOS总体结构" class="align-center" id="device-os-detail" src="../_images/device-os-detail.png" style="width: 868.8000000000001px; height: 692.0px;" /></a>
+<p>我们先分析一下图的上下两部分。从上图的左上角可以看到为应用程序增加了GUI相关的新系统调用。应用程序可以通过 <code class="docutils literal notranslate"><span class="pre">sys_framebuffer</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sys_framebuffer_flush</span></code> 来显示图形界面，通过 <code class="docutils literal notranslate"><span class="pre">sys_event_get</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sys_key_pressed</span></code> 来接收来自串口/键盘/鼠标的输入事件。这其实就形成了基本的GUI应用支持框架。在上图的中上部，添加了三个GUI应用的图形显示，从左到右分别是： <code class="docutils literal notranslate"><span class="pre">gui_simple</span></code> 、 <code class="docutils literal notranslate"><span class="pre">gui_snake</span></code> 和 <code class="docutils literal notranslate"><span class="pre">gui_rect</span></code> 。</p>
+<p>在上图的最下面展示的硬件组成中，可以看到由Qemu模拟器仿真的 <code class="docutils literal notranslate"><span class="pre">Virt</span> <span class="pre">Machine</span></code> ，它包含了我们要管理的各种硬件组件，包括在前面章节中重点涉及的 <code class="docutils literal notranslate"><span class="pre">CPU</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Main</span> <span class="pre">Memory</span></code> ，还包括新引入的外设，  <code class="docutils literal notranslate"><span class="pre">ns16500</span></code> UART串口外设、 <code class="docutils literal notranslate"><span class="pre">virtio-gpu</span></code> 图形显示外设、 <code class="docutils literal notranslate"><span class="pre">virtio-input</span></code> 键盘鼠标外设、 <code class="docutils literal notranslate"><span class="pre">vritio-blk</span></code> 硬盘存储设备。为了与这些硬件交互，系统软件还需了解有关这些外设的硬件参数模型，如各个外设的控制寄存器的内存起始地址和范围等，这就是Qemu模拟器中的 <code class="docutils literal notranslate"><span class="pre">Virt</span> <span class="pre">Machine</span></code> 硬件参数模型。硬件参数的具体内容可以在Qemu源码 <code class="docutils literal notranslate"><span class="pre">qemu/include/hw/riscv/virt.h</span></code> 和  <code class="docutils literal notranslate"><span class="pre">qemu/hw/riscv/virt.c</span></code> 中找到。</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// qemu/hw/riscv/virt.c</span>
+<span class="linenos"> 2</span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">MemMapEntry</span><span class="w"> </span><span class="n">virt_memmap</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 3</span><span class="w">   </span><span class="p">[</span><span class="n">VIRT_PLIC</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">        </span><span class="p">{</span><span class="w">  </span><span class="mh">0xc000000</span><span class="p">,</span><span class="w"> </span><span class="n">VIRT_PLIC_SIZE</span><span class="p">(</span><span class="n">VIRT_CPUS_MAX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="linenos"> 4</span><span class="w">   </span><span class="p">[</span><span class="n">VIRT_UART0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">       </span><span class="p">{</span><span class="w"> </span><span class="mh">0x10000000</span><span class="p">,</span><span class="w">         </span><span class="mh">0x100</span><span class="w"> </span><span class="p">},</span>
+<span class="linenos"> 5</span><span class="w">   </span><span class="p">[</span><span class="n">VIRT_VIRTIO</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="mh">0x10001000</span><span class="p">,</span><span class="w">        </span><span class="mh">0x1000</span><span class="w"> </span><span class="p">},</span>
+<span class="linenos"> 6</span><span class="w">   </span><span class="p">[</span><span class="n">VIRT_DRAM</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="mh">0x80000000</span><span class="p">,</span><span class="w">           </span><span class="mh">0x0</span><span class="w"> </span><span class="p">},</span>
+<span class="linenos"> 7</span><span class="w">   </span><span class="p">...</span>
+<span class="linenos"> 8</span><span class="p">};</span>
+<span class="linenos"> 9</span><span class="c1">// qemu/include/hw/riscv/virt.h</span>
+<span class="linenos">10</span><span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">11</span><span class="w">   </span><span class="n">UART0_IRQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="linenos">12</span><span class="w">   </span><span class="n">VIRTIO_IRQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="cm">/* 1 to 8 */</span>
+<span class="linenos">13</span><span class="w">   </span><span class="p">...</span>
+<span class="linenos">14</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>在上面的代码片段中，可以看到 UART 串口外设的控制寄存器的MMIO内存起始地址和空间大小为： <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">0x10000000,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0x100</span> <span class="pre">}</span></code> ，而其它 <code class="docutils literal notranslate"><span class="pre">virtio</span></code> 外设的控制寄存器的MMIO内存起始地址和空间大小为 <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">0x10001000,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0x1000</span> <span class="pre">}</span></code> 。当操作系统知道这些外设的控制寄存器的MMIO内存地址后，就可以通过读写这些寄存器来访问和管理这些外设了。</p>
+<p>同时，我们也看到了各种外设的中断号，如串口中断号 <code class="docutils literal notranslate"><span class="pre">UART0_IRQ</span></code> 为10， 而``virtio`` 外设的中断号有8个，编号为 1~8。而对各种外设的中断的管理、检测发送给CPU等事务都在一个特殊的设备中完成，即 <code class="docutils literal notranslate"><span class="pre">PLIC</span></code> 平台级中断控制器（Platform Level InterruptController），它的控制寄存器内存起始地址和空间大小为 <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">0xc000000,</span> <span class="pre">VIRT_PLIC_SIZE(VIRT_CPUS_MAX</span> <span class="pre">*</span> <span class="pre">2)</span> <span class="pre">}</span></code> ，它的空间大小与CPU个数相关。</p>
+<p>现在看看上图中部的操作系统，蓝边橙底方块的部分是主要增加的内容，包括了外设驱动和与外设相关的中断处理。 根据与各种外设的连线可以看到两类驱动：外设驱动和平台驱动。</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">virtio-GPU</span> <span class="pre">Drv</span></code>：图形显示驱动</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ns16550a</span> <span class="pre">Drv</span></code>：串口驱动</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">virtio-input</span> <span class="pre">Drv</span></code>：键盘鼠标驱动</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">virtio-Block</span> <span class="pre">Drv</span></code>：块设备驱动</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PLIC</span> <span class="pre">drv</span></code>：平台级中断控制器驱动</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Virt</span> <span class="pre">Machine</span> <span class="pre">Conf</span></code>：<code class="docutils literal notranslate"><span class="pre">virt</span></code> 计算机系统配置信息（可以理解为平台级配置驱动）</p></li>
+</ul>
+</div></blockquote>
+<p>在与外设相关的中断处理方面，主要增加了对外设中断的处理，并被功能扩展的 <code class="docutils literal notranslate"><span class="pre">异常控制流管理</span></code> 内核模块进行统一管理。 <code class="docutils literal notranslate"><span class="pre">异常控制流管理</span></code> 内核模块主要的扩展包括两方面，一方面是支持在内核态响应各种中断，这样就能在内核态中处理外设的中断事件。为此需要扩展在内核态下的中断上下文保存/恢复操作，并根据外设中断号来调用相应外设驱动中的外设中断处理函数。</p>
+<p>另一方面是提供了 <code class="docutils literal notranslate"><span class="pre">UPIntrFreeCell&lt;T&gt;</span></code> 接口，代替了之前的 <code class="docutils literal notranslate"><span class="pre">UPSafeCell&lt;T&gt;</span></code> 。在Device OS 中把 <code class="docutils literal notranslate"><span class="pre">UPSafeCell&lt;T&gt;</span></code> 改为 <code class="docutils literal notranslate"><span class="pre">UPIntrFreeCell&lt;T&gt;</span></code> 。这是因为在第九章前，系统设置在S-Mode中屏蔽中断，所以在 S-Mode中运行的内核代码不会被各种外设中断打断，这样在单处理器的前提下，采用 <code class="docutils literal notranslate"><span class="pre">UPSafeCell</span></code> 来实现对可写数据的独占访问支持是够用的。但在第九章中，系统配置改为在S-Mode中使能中断，所以内核代码在内核执行过程中会被中断打断，无法实现可靠的独占访问。本章引入了新的 <code class="docutils literal notranslate"><span class="pre">UPIntrFreeCell</span></code> 机制，使得在通过 <code class="docutils literal notranslate"><span class="pre">UPIntrFreeCell</span></code> 对可写数据进行独占访问前，先屏蔽中断；而对可写数据独占访问结束后，再使能中断。从而确保线程对可写数据的独占访问时，不会被中断打断或引入可能的线程切换，而避免了竞态条件的产生。</p>
+<p>在内核层，为了支持Qemu模拟的 <code class="docutils literal notranslate"><span class="pre">Virt</span></code> 计算机中不同外设，增加了3个外设级设备驱动程序，分别是 <code class="docutils literal notranslate"><span class="pre">virtio-gpu</span></code> 显示驱动、 <code class="docutils literal notranslate"><span class="pre">virtio-input</span></code> 输入驱动和 <code class="docutils literal notranslate"><span class="pre">ns16650</span></code> 串口设备驱动，改进了 <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 块设备驱动，以支持高效的中断响应。而各种外设需要计算机中的支持。这4个外设级设备驱动程序需要计算机平台级的配置与管理，所以还增加了 <code class="docutils literal notranslate"><span class="pre">Virt</span> <span class="pre">Machine</span> <span class="pre">Conf</span></code> 和 <code class="docutils literal notranslate"><span class="pre">PLIC</span></code> 两个平台级设备驱动程序。在独立于操作系统的软件库中，增加了 <code class="docutils literal notranslate"><span class="pre">virtio-drivers</span></code> 库，实现了各种 <code class="docutils literal notranslate"><span class="pre">virtio</span></code> 外设的裸机设备驱动的主要功能。这样在实现操作系统中的设备驱动程序时，就可以直接封装 <code class="docutils literal notranslate"><span class="pre">virtio</span></code> 裸机设备驱动中的功能，简化了设备驱动程序的编写难度。</p>
+<p>本章的代码主要包括两部分内容。一部分是virtio-drivers仓库中的驱动代码和裸机示例代码：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>├── examples
+<span class="linenos"> 2</span>│   └── riscv
+<span class="linenos"> 3</span>│       └── src
+<span class="linenos"> 4</span>│           ├── main.rs （各种virtio设备的测试用例）
+<span class="linenos"> 5</span>│           └── virtio_impl.rs (用于I/O数据的物理内存空间管理的简单实现)
+<span class="linenos"> 6</span>└── src
+<span class="linenos"> 7</span>   ├── blk.rs (virtio-blk 驱动)
+<span class="linenos"> 8</span>   ├── gpu.rs (virtio-gpu 驱动)
+<span class="linenos"> 9</span>   ├── hal.rs (用于I/O数据的物理内存空间管理接口)
+<span class="linenos">10</span>   ├── header.rs (VirtIOHeader: MMIO设备寄存器接口)
+<span class="linenos">11</span>   ├── input.rs (virtio-input 驱动)
+<span class="linenos">12</span>   ├── net.rs (virtio-net 驱动)
+<span class="linenos">13</span>   └── queue.rs (virtqueues: 批量I/O数据传输的机制)
+</pre></div>
+</div>
+<p>另外一部分是侏罗猎龙操作系统 – Device OS 代码：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="go">├── ...</span>
+<span class="linenos"> 2</span><span class="go">├── easy-fs</span>
+<span class="linenos"> 3</span><span class="go">│   └── src</span>
+<span class="linenos"> 4</span><span class="go">│       ├── ...</span>
+<span class="linenos"> 5</span><span class="go">│       └── block_dev.rs (BlockDevice trait中增加handle_irq接口)</span>
+<span class="linenos"> 6</span><span class="go">├── os</span>
+<span class="linenos"> 7</span><span class="go">│   └── src</span>
+<span class="linenos"> 8</span><span class="go">│       ├── ...</span>
+<span class="linenos"> 9</span><span class="go">│       ├── main.rs（扩展blk/gpu/input等外设初始化调用）   W</span>
+<span class="linenos">10</span><span class="go">│       ├── config.rs （修改KERNEL_HEAP_SIZE和MEMORY_END，扩展可用内存空间）</span>
+<span class="linenos">11</span><span class="go">│       ├── boards</span>
+<span class="linenos">12</span><span class="go">│       │   └── qemu.rs (扩展blk/gpu/input等外设地址设定/初始化/中断处理等操作)</span>
+<span class="linenos">13</span><span class="go">│       ├── drivers</span>
+<span class="linenos">14</span><span class="go">│       │   ├── block</span>
+<span class="linenos">15</span><span class="go">│       │   │   └── virtio_blk.rs（增加非阻塞读写块/中断响应等I/O操作）</span>
+<span class="linenos">16</span><span class="go">│       │   ├── bus</span>
+<span class="linenos">17</span><span class="go">│       │   │   └── virtio.rs（增加virtio-drivers需要的Hal trait接口）</span>
+<span class="linenos">18</span><span class="go">│       │   ├── chardev</span>
+<span class="linenos">19</span><span class="go">│       │   │   └── ns16550a.rs（增加s-mode下的串口驱动）</span>
+<span class="linenos">20</span><span class="go">│       │   ├── gpu</span>
+<span class="linenos">21</span><span class="go">│       │   │   └── mod.rs（增加基于virtio-gpu基本驱动的OS驱动）</span>
+<span class="linenos">22</span><span class="go">│       │   ├── input</span>
+<span class="linenos">23</span><span class="go">│       │   │   └── mod.rs（增加基于virtio-input基本驱动的OS驱动）</span>
+<span class="linenos">24</span><span class="go">│       │   └── plic.rs（增加RISC-V的PLIC中断控制器驱动）</span>
+<span class="linenos">25</span><span class="go">│       ├── fs</span>
+<span class="linenos">26</span><span class="go">│       │   └── stdio.rs（改用s-mode下的串口驱动进行输入输出字符）</span>
+<span class="linenos">27</span><span class="go">│       ├── mm</span>
+<span class="linenos">28</span><span class="go">│       │   └── memory_set.rs（扩展Linear内存映射方式，用于显示内存存映射）</span>
+<span class="linenos">29</span><span class="go">│       ├── sync</span>
+<span class="linenos">30</span><span class="go">│       │   ├── condvar.rs（扩展条件变量的wait方式，用于外设驱动）</span>
+<span class="linenos">31</span><span class="go">│       │   └── up.rs（扩展 UPIntrFreeCell&lt;T&gt; 支持内核态屏蔽中断的独占访问）</span>
+<span class="linenos">32</span><span class="go">│       ├── syscall</span>
+<span class="linenos">33</span><span class="go">│       │   ├── gui.rs（增加图形显示相关的系统调用）</span>
+<span class="linenos">34</span><span class="go">│       │   └── input.rs（增加键盘/鼠标/串口相关事件的系统调用）</span>
+<span class="linenos">35</span><span class="go">│       └── trap</span>
+<span class="linenos">36</span><span class="go">│           ├── mod.rs（扩展在用户态和内核态响应外设中断）</span>
+<span class="linenos">37</span><span class="go">│           └── trap.S（扩展内核态响应中断的保存与恢复寄存器操作）</span>
+<span class="linenos">38</span><span class="go">└── user</span>
+<span class="linenos">39</span><span class="go">   └── src</span>
+<span class="linenos">40</span><span class="go">      ├── bin</span>
+<span class="linenos">41</span><span class="go">      │   ├── gui_rect.rs (显示不同大小正方形)</span>
+<span class="linenos">42</span><span class="go">      │   ├── gui_simple.rs（彩色显示屏幕）</span>
+<span class="linenos">43</span><span class="go">      │   ├── gui_snake.rs（用&#39;a&#39;/&#39;s&#39;/&#39;d&#39;/&#39;w&#39;控制的贪吃蛇图形游戏）</span>
+<span class="linenos">44</span><span class="go">      │   ├── gui_uart.rs (用串口输入字符来控制显示正方形)</span>
+<span class="linenos">45</span><span class="go">      │   ├── huge_write_mt.rs（写磁盘文件性能测试例子）</span>
+<span class="linenos">46</span><span class="go">      │   ├── inputdev_event.rs（接收键盘鼠标输入事件）</span>
+<span class="linenos">47</span><span class="go">      │   ├── random_num.rs（产生随机数）</span>
+<span class="linenos">48</span><span class="go">      │   └── ...</span>
+<span class="linenos">49</span><span class="go">      ├── file.rs（文件系统相关的调用）</span>
+<span class="linenos">50</span><span class="go">      ├── io.rs（图形显示与交互相关的系统调用）</span>
+<span class="linenos">51</span><span class="go">      ├── sync.rs（同步互斥相关的系统调用）</span>
+<span class="linenos">52</span><span class="go">      ├── syscall.rs（扩展图形显示与交互的系统调用号和系统调用接口）</span>
+<span class="linenos">53</span><span class="go">      └── task.rs（进程线程相关的系统调用）</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>本章代码导读<a class="headerlink" href="#id9" title="永久链接至标题">#</a></h2>
+<div class="section" id="id10">
+<h3>设计设备驱动程序的总体思路<a class="headerlink" href="#id10" title="永久链接至标题">#</a></h3>
+<p>这里简要介绍一下在内核中添加设备驱动的大致开发过程。本章涉及的代码主要与设备驱动相关，需要了解硬件，还需要了解如何与操作系统内核的其他部分进行对接，包括其他内核模块可以给驱动提供的内核服务，如内存分配等，以及需要驱动提供的支持功能，如外设中断响应等。在Rust软件工程开发中，推荐代码重用的Crate设计。所以在实际开发中，可以先在没有操作系统的裸机环境下（no-std）实现具备基本功能的裸机设备驱动 Crate，再实现一个最小执行环境（类似我们在第一章完成的 <code class="docutils literal notranslate"><span class="pre">三叶虫操作系统</span> <span class="pre">--</span> <span class="pre">LibOS</span></code> ），并在此最小执行环境中测试裸机设备驱动 Crate的基本功能能正常运行。然后再在操作系统内核中设计实现设备驱动程序。操作系统中的设备驱动程序可以通过一层封装来使用裸机设备驱动 Crate 的各种功能，并对接操作系统的而其他内核模块。这样，操作系统中的设备驱动的开发和测试相对会简化不少。</p>
+<p>设计设备驱动程序前，需要了解应用程序或操作系统中的其他子系统需要设备驱动程序完成哪些功能，再根据所需提供的功能完成如下基本操作：</p>
+<ul class="simple">
+<li><ol class="arabic simple">
+<li><p>设备扫描/发现</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="2">
+<li><p>设备初始化</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="3">
+<li><p>准备发给设备的命令</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="4">
+<li><p>通知设备</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="5">
+<li><p>接收设备通知</p></li>
+</ol>
+</li>
+<li><p>6.（可选）卸载设备驱动时回收设备驱动资源</p></li>
+</ul>
+<p>对于设计实现裸机设备驱动，首先需要大致了解对应设备的硬件规范。在本章中，主要有两类设备，一类是实际的物理设备 – UART（QEMU模拟了这种NS16550a UART芯片规范）；另外一类是虚拟设备（如各种Virtio设备）。</p>
+<p>然后需要了解外设是如何与CPU连接的。首先是CPU访问外设的方式，在RISC-V环境中，把外设相关的控制寄存器映射为某特定的内存区域（即MMIO映射方式），然后CPU通过读写这些特殊区域来访问外设（即PIO访问方式）。外设可以通过DMA来读写主机内存中的数据，并可通过中断来通知CPU。外设并不直接连接CPU，这就需要了解RISC-V中的平台级中断控制器（Platform-Level Interrupt Controller，PLIC），它管理并收集各种外设中断信息，并传递给CPU。</p>
+</div>
+<div class="section" id="id11">
+<h3>裸机设备驱动程序<a class="headerlink" href="#id11" title="永久链接至标题">#</a></h3>
+<p>对于裸机设备驱动程序对外设的具体管理过程，大致会有发现外设、初始化外设和I/O读写与控制等操作。理解这些操作和对应的关键数据结构，就大致理解外设驱动要完成的功能包含哪些内容。每个设备驱动的关键数据结构和处理过程有共性部分和特定的部分。同学们可以从 <code class="docutils literal notranslate"><span class="pre">virtio-drivers</span></code> crate 中的  <code class="docutils literal notranslate"><span class="pre">examples/riscv/src/main.rs</span></code> 和 <code class="docutils literal notranslate"><span class="pre">src\blk.rs</span></code> 有关virtio设备的功能测试例子来分析。以 <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 存储设备为例，可以看到需要完成的工作包括：</p>
+<ol class="arabic simple">
+<li><p>设备扫描/发现：首先是访问 <code class="docutils literal notranslate"><span class="pre">OpenSBI</span></code> (这里没有用RustSBI，用的是QEMU内置的SBI实现)提供的设备树信息，了解QEMU硬件中存在的各种外设，根据外设ID来找到 <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 存储设备。</p></li>
+</ol>
+<div class="mermaid">
+            graph LR
+
+A[&quot;init_dt(device_tree_paddr)&quot;] --&gt; B[&quot;walk_dt_node(&amp;dt.root)&quot;] --&gt; C[&quot;virtio_probe(node)&quot;] --&gt; D[&quot;virtio_probe(dt)&quot;] --&gt; F[&quot;virtio_blk(header)&quot;]
+        </div><ol class="arabic simple" start="2">
+<li><p>设备初始化：找到 <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 外设后，就进行外设的初始化，如果学习了 virtio规范（需要关注的是 virtqueue、virtio-mmio device， virtio-blk device的描述内容），那就可以看出代码实现的初始化过程和virtio规范中的virtio设备初始化步骤基本上是一致的，但也有与具体设备相关的特定初始化内容，比如分配 I/O buffer等。</p></li>
+</ol>
+<div class="mermaid">
+            graph LR
+
+A[&quot;VirtIOBlk::&lt;HalImpl&gt;::new(header)&quot;] --&gt; B[&quot;header.begin_init(...)&quot;]
+A --&gt; C[read configuration space]
+A --&gt; D[&quot;VirtQueue::new(...)&quot;]
+A --&gt; E[&quot;header.finish_init()&quot;]
+        </div><ol class="arabic simple" start="3">
+<li><p>准备发给设备的命令：初始化完毕后，设备驱动在收到上层内核发出的读写扇区/磁盘块的请求后，就能通过 <code class="docutils literal notranslate"><span class="pre">virtqueue</span></code> 传输通道发出 <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 设备能接收的I/O命令和I/O buffer的区域信息。</p></li>
+<li><p>通知设备： 驱动程序通过 <cite>kick</cite> 机制（即写virtio设备中特定的通知控制寄存器）来通知设备有新请求。</p></li>
+</ol>
+<div class="mermaid">
+            graph LR
+
+A[read_block] --&gt; E[建立I/O命令] --&gt; F[加入到到virtqueue队列中] --&gt; G[通过写寄存器通知设备]
+B[read_block_nb] --&gt; E
+C[write_block] --&gt; E
+D[write_block_nb] --&gt; E
+        </div><ol class="arabic simple" start="5">
+<li><p>接收设备通知： <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 设备收到信息后，会通过DMA操作完成磁盘数据的读写，然后通过中断或其他方式让设备驱动知道命令完成或命令执行失败。由于中断处理例程的完整操作与操作系统内核相关性较大，所以在裸机设备驱动中，没有实现这部分的完整功能，而只是提供了表示收到中断的操作。</p></li>
+</ol>
+</div>
+<div class="section" id="id12">
+<h3>操作系统设备驱动程序<a class="headerlink" href="#id12" title="永久链接至标题">#</a></h3>
+<p>由于有了裸机设备驱动程序的实现，对于操作系统设备程序，可以直接访问裸机设备驱动程序的各种功能。这样操作系统设备驱动程序的复杂性和代码量大大降低，整个代码量不到100行。不过还需解决如下一些关键问题：</p>
+<ul class="simple">
+<li><p>发现具体计算机（如 <code class="docutils literal notranslate"><span class="pre">virt</span> <span class="pre">machine</span></code> ）中的设备（即与设备交互的设备控制寄存器的MMIO内存地址）；</p></li>
+<li><p>与其它操作系统内核模块（如文件系统、同步互斥、进程管理等）的对接；</p></li>
+<li><p>封装裸机设备驱动程序，提供操作系统层面的I/O设备访问能力（初始化、读写、控制等操作）。</p></li>
+</ul>
+<p>另外，操作系统还需满足裸机设备驱动程序对操作系统的需求，并能对各种外设进行统一的管理，这主要集中在硬件平台级的支持。主要的服务能力包括:</p>
+<ul class="simple">
+<li><p>在硬件平台层面发现具体计算机（如 <code class="docutils literal notranslate"><span class="pre">virt</span> <span class="pre">machine</span></code> ）中的各种外设的能力；</p></li>
+<li><p>在硬件平台层面的外设中断总控能力，即在外设中断产生后，能分析出具体是哪个外设产生的中断，并进行相应的处理；</p></li>
+<li><p>给裸机设备驱动程序提供操作系统级别的服务能力，以 <code class="docutils literal notranslate"><span class="pre">virtio-drivers</span></code> 为例，OS需要提供 <code class="docutils literal notranslate"><span class="pre">HAL</span></code> Trait的具体实现，即驱动进行I/O操作所需的内存动态分配。</p></li>
+</ul>
+<p>以面向 <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 外设的操作系统驱动为例，我们可以看看上述过程的具体实现。在硬件平台的总体支持方面，为简化操作，通过对Qemu的分析，在操作系统中直接给出  <code class="docutils literal notranslate"><span class="pre">virt</span> <span class="pre">machine</span></code> 中各个外设的控制寄存器地址（代码位置: <code class="docutils literal notranslate"><span class="pre">os/src/boards/qemu.rs</span></code> ）。为了完成外设中断总控，操作系统提供了 <code class="docutils literal notranslate"><span class="pre">PLIC</span></code> 驱动，支持对 <code class="docutils literal notranslate"><span class="pre">virt</span> <span class="pre">machine</span></code> 中各种外设的中断响应（代码位置: <code class="docutils literal notranslate"><span class="pre">os/src/drivers/plic.rs</span></code> ）。</p>
+<p>在具体设备驱动实现上，首先是发现设备，操作系统建立了表示virtio_blk设备驱动的全局变量 <code class="docutils literal notranslate"><span class="pre">BLOCK_DEVICE</span></code> （代码位置: <code class="docutils literal notranslate"><span class="pre">os/src/drivers/block/mod.rs</span></code> ）。为简化发现设备的过程，操作系统直接指定了virtio_blk设备在 <code class="docutils literal notranslate"><span class="pre">virt</span> <span class="pre">machine</span></code> 中的设备控制寄存器地址 <code class="docutils literal notranslate"><span class="pre">VIRTIO0</span></code>。</p>
+<p>然后是驱动程序初始化、读写块和中断处理的实现（代码位置: <code class="docutils literal notranslate"><span class="pre">os/src/drivers/block/virtio_blk.rs</span></code> ）。在操作系统的第一次访问 <code class="docutils literal notranslate"><span class="pre">BLOCK_DEVICE</span></code> 时，会执行 <code class="docutils literal notranslate"><span class="pre">VirtIOBlock::new()</span></code> 方法，通过调用virtio_blk裸机设备驱动库中的功能，完成了块设备驱动的初始化工作，并初始化条件变量，用于后续块读写过程中与进程的交互（即让等待I/O访问结果的进程先挂起）。</p>
+<p>块设备驱动的服务对象是文件系统，它们之间需要有一个交互的接口，这就是在 <code class="docutils literal notranslate"><span class="pre">easy-fs</span></code> 文件系统模块定义的 <code class="docutils literal notranslate"><span class="pre">BlockDevice</span></code> trait：</p>
+<div class="highlight-Rust notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">BlockDevice</span>: <span class="nb">Send</span> <span class="o">+</span><span class="w"> </span><span class="nb">Sync</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Any</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">2</span><span class="w">   </span><span class="k">fn</span> <span class="nf">read_block</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">block_id</span>: <span class="kt">usize</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="p">[</span><span class="kt">u8</span><span class="p">]);</span>
+<span class="linenos">3</span><span class="w">   </span><span class="k">fn</span> <span class="nf">write_block</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">block_id</span>: <span class="kt">usize</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">]);</span>
+<span class="linenos">4</span><span class="w">   </span><span class="k">fn</span> <span class="nf">handle_irq</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">);</span>
+<span class="linenos">5</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>操作系统块设备驱动程序通过调用裸机块设备驱动程序库，可以很简洁地实现上述功能。在具体实现上，在调用了裸机块设备驱动程序库的读写块方法后，通过条件变量让等待I/O访问结果的进程先挂起）。在中断处理的方法中，在得到I/O读写块完成的中断信息后，通过条件变量唤醒等待的挂起进程。</p>
+<p>至此，就分析完毕操作系统设备驱动程序的所有功能了。接下来，我们就可以深入分析到I/O设备管理的级别概念、抽象描述和侏罗猎龙操作系统的具体实现。</p>
+<dl class="footnote brackets">
+<dt class="label" id="juravenator"><span class="brackets"><a class="fn-backref" href="#id4">1</a></span></dt>
+<dd><p>侏罗猎龙是一种小型恐龙，生活在1亿5千万年前的侏罗纪，它有独特的鳞片状的皮肤感觉器官，具有类似鳄鱼的触觉、冷热以及pH等综合感知能力，可能对狩猎有很大帮助。</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="1io-interface.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">I/O设备</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">第九章：I/O设备管理</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2020-2022, Yu Chen, Yifan Wu
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            目录
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">引言</a><ul>
+<li><a class="reference internal" href="#id2">本章导读</a><ul>
+<li><a class="reference internal" href="#id3">以往操作系统对设备的访问</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">实践体验</a><ul>
+<li><a class="reference internal" href="#id6">裸机设备驱动程序</a></li>
+<li><a class="reference internal" href="#id7">侏罗猎龙操作系统</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">本章代码树</a></li>
+<li><a class="reference internal" href="#id9">本章代码导读</a><ul>
+<li><a class="reference internal" href="#id10">设计设备驱动程序的总体思路</a></li>
+<li><a class="reference internal" href="#id11">裸机设备驱动程序</a></li>
+<li><a class="reference internal" href="#id12">操作系统设备驱动程序</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script kind="utterances">
 
     var commentsRunWhenDOMLoaded = cb => {
     if (document.readyState != 'loading') {
@@ -70,309 +797,9 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
-        <script src="../_static/translations.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
-    <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="I/O设备" href="1io-interface.html" />
-    <link rel="prev" title="第九章：I/O设备管理" href="index.html" /> 
-</head>
-
-<body class="wy-body-for-nav">
-
-   
-  <div class="wy-grid-for-nav">
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../index.html" class="icon icon-home"> rCore-Tutorial-Book-v3
-          
-
-          
-          </a>
-
-          
-            
-            
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="在文档中搜索" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption" role="heading"><span class="caption-text">Part1 - Just do it!</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../chapter0/index.html">第零章：操作系统概述</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter1/index.html">第一章：应用程序与基本执行环境</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">第二章：批处理系统</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">第三章：多道程序与分时多任务</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">第四章：地址空间</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">第五章：进程</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">第六章：文件系统</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">第七章：进程间通信与 I/O 重定向</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter8/index.html">第八章：并发</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">第九章：I/O设备管理</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">引言</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">本章导读</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">实践体验</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">本章代码树</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">本章代码导读</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="1io-interface.html">I/O设备</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2device-driver-1.html">外设平台与串口驱动程序</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2device-driver-2.html">virtio设备驱动程序</a></li>
-<li class="toctree-l2"><a class="reference internal" href="4exercise.html">练习</a></li>
-<li class="toctree-l2"><a class="reference internal" href="5answer.html">练习参考答案</a></li>
-</ul>
-</li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">附录</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../final-lab.html">综合练习</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Rust 系统编程入门</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：常见工具的使用方法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：深入机器模式：RustSBI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：RISC-V相关信息</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：操作系统进一步介绍</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../terminology.html">术语中英文对照表</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">开发注记</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../setup-sphinx.html">修改和构建本项目</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rest-example.html">reStructuredText 基本语法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../log.html">更新日志</a></li>
-</ul>
-
-            
-          
-        </div>
-        
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">rCore-Tutorial-Book-v3</a>
-        
-      </nav>
-
-
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="index.html">第九章：I/O设备管理</a> &raquo;</li>
-        
-      <li>引言</li>
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../_sources/chapter9/0intro.rst.txt" rel="nofollow"> 查看页面源码</a>
-          
-        
-      </li>
-    
-  </ul>
-
-  
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-            
-  <div class="section" id="id1">
-<h1>引言<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<div class="section" id="id2">
-<h2>本章导读<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<p>进化的 “达科塔盗龙” 操作系统已经具备了传统操作系统中的内在重要因素，如进程、文件、地址空间、进程间通信、线程并发执行等，应用程序也能通过操作系统输入输出字符，读写在磁盘上的数据。不过与我们常见的操作系统（如Linux,Windows等）比起来，好像感知与交互的I/O能力还比较弱。</p>
-<p>终于到了I/O设备管理这一章了。人靠衣裳马靠鞍，如果操作系统不能把计算机的外设功能给发挥出来，那应用程序感知外在环境的能力和展示内在计算的能力都会大打折扣。比如基于中断机制的高效I/O处理，图形化的显示，这些操作系统新技能将在本章展现出来。所以本章要完成的操作系统的核心目标是： <strong>让应用能便捷地访问外设</strong> 。</p>
-<p>其实在第一章就非常简单介绍了QEMU模拟的RISC-V 64计算机中存在的外设：UART、时钟、virtio-net/block/console/gpu等。并且LibOS模式的操作系统就已通过RustSBI间接地接触过串口设备了，即通过RustSBI提供的一个SBI调用 <code class="docutils literal notranslate"><span class="pre">SBI_CONSOLE_PUTCHAR</span></code> 来完成字符输出功能的。</p>
-<p>在第三章，为了能实现抢占式调度，引入了时钟这个外设，结合硬件中断机制，并通过SBI调用 <code class="docutils literal notranslate"><span class="pre">SBI_SET_TIMER</span></code> 来帮助操作系统在固定时间间隔内获得控制权。而到了第五章，我们通过另外一个SBI调用 <code class="docutils literal notranslate"><span class="pre">SBI_CONSOLE_GETCHAR</span></code> 来获得输入的字符能力。这时的操作系统就拥有了与使用者进行简单字符交互的能力了。</p>
-<p>后来在第七章又引入了另外一个外设virtio-block设备，即一个虚拟的磁盘设备。还通过这个存储设备完成了对数据的持久存储，并在其上实现了管理存储设备上持久性数据的文件系统。对virtio-block设备的I/O访问没有通过RustSBI来完成，而是直接调用了 <code class="docutils literal notranslate"><span class="pre">virtio_drivers</span></code> crate中的 <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 设备驱动程序来实现的。但我们并没有深入分析这个设备驱动程序的具体实现。</p>
-<p>可以说在操作系统中，I/O设备管理无处不在，且与I/O设备相关的操作系统代码–设备驱动程序在整个操作系统中的代码量比例是最高的（Linux/Windows等都达到了75%以上），也是出错概率最大的地方。虽然前面章节的操作系统已经涉及了很多I/O设备访问的相关处理，但我们并没有对I/O设备进行比较全面的分析和讲解。这主要是由于各种I/O设备差异性比较大，操作系统很难像进程/地址空间/文件那样，对各种I/O设备建立一个一致通用的抽象和对应的解决方案。</p>
-<p>但I/O设备非常重要，由于各种I/O(输入输出)设备的存在才使得计算机的强大功能得以展现在大众面前，事实上对于各种I/O设备的高效管理是计算机系统操作系统能够在大众中普及的重要因素。比如对于手机而言，大众关注的不是CPU有多快，内存有多大，而是关注显示是否流畅，触摸是否敏捷这些外设带来的人机交互体验。而这些体验在很大程度上取决于操作系统对外设的管理与访问效率。</p>
-<p>另外，对I/O设备的管理体现了操作系统最底层的设计机制，如中断，并发，异步，缓冲，同步互斥等。这对上层的进程，地址空间，文件等有着深刻的影响。所以在设计和实现了进程，地址空间，文件这些经典的操作系统抽象概念后，我们需要再重新思考一下，具备I/O设备管理能力的操作系统应该如何设计，特别是是否能给I/O设备也建立一个操作系统抽象。如果同学带着这些问题来思考和实践，将会对操作系统有更全面的体会。</p>
-<div class="admonition note">
-<p class="admonition-title">注解</p>
-<p><strong>UNIX诞生是从磁盘驱动程序开始的</strong></p>
-<p>回顾UNIX诞生的历史，你会发现一个有趣的故事：贝尔实验室的Ken Tompson在退出Mulitics操作系统开发后，还是想做继续操作系统方面的探索。他先是给一台闲置的PDP-7计算机的磁盘驱动器写了一个包含磁盘调度算法的磁盘驱动程序，希望提高磁盘I/O读写速度。为了测试磁盘访问性能，Ken Tompson花了三周时间写了一个操作系统，这就是Unix的诞生。这说明是磁盘驱动程序促使了UNIX的诞生。</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">注解</p>
-<p>设备驱动程序是操作系统的一部分？</p>
-<p>我们都知道计算机是由CPU、内存和I/O设备组成的。即使是图灵创造的图灵机这一理论模型，也有其必须存在的I/O设备：笔和纸。1946年出现的远古计算机ENIAC，都具有读卡器和打卡器来读入和输出穿孔卡片中的数据。当然，这些外设不需要额外编写软件，直接通过硬件电路就可以完成I/O操作了。但后续磁带和磁盘等外设的出现，使得需要通过软件来管理越来越复杂的外设功能了，这样设备驱动程序（Device Driver）就出现了，它甚至出现在操作系统之前，以子程序库的形式存在，以便于应用程序来访问硬件。</p>
-<p>随着计算机外部设备越来越多，越来越复杂，设备驱动程序在操作系统中的代码比重也越来越大。甚至某些操作系统的名称直接加入了外设名，如微软在 1981 年至 1995 年间主导了个人计算机市场的DOS操作系统的全称是“Disk Operating System”。1973 年，施乐 PARC 开发了Alto个人电脑，它是第一台具有图形用户界面(GUI) 的计算机，直接影响了苹果公司和微软公司设计的带图形界面的操作系统。微软后续开发的操作系统名称“Windows”也直接体现了图形显示设备（显卡）能够展示的抽象概念，显卡驱动和基于显卡驱动的图形界面子系统在Windows操作系统中始终处于非常重要的位置。</p>
-<p>目前评价操作系统被产业界接受的程度有一个公认的量化指标，该操作系统的设备驱动程序支持的外设种类和数量。量越大说明它在市场上的接受度就越高。正是由于操作系统能够访问和管理各种外设，才给了应用程序丰富多彩的功能。</p>
-</div>
-<p>本章的目标是深入理解I/O设备管理，并将站在I/O设备管理的角度来分析I/O设备的特征，操作系统与I/O设备的交互方式。接着会进一步通过串口，磁盘，图形显示等各种外设的具体实现来展现操作系统是如何管理I/O设备的，并展现设备驱动与操作系统内核其它重要部分的交互, 通过扩展操作系统的I/O能力，形成具有灵活感知和捕猎能力的侏罗猎龙 <a class="footnote-reference brackets" href="#juravenator" id="id3">1</a> 操作系统。</p>
-</div>
-<div class="section" id="id4">
-<h2>实践体验<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
-<p>获取本章代码：</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/rcore-os/virtio-drivers.git
-<span class="gp">$ </span><span class="nb">cd</span> virtio-drivers
-<span class="gp">$ </span><span class="nb">cd</span> examples/riscv
-</pre></div>
-</div>
-<p>在 qemu 模拟器上运行本章代码：</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>make run
-</pre></div>
-</div>
-<img alt="../_images/virtio-test-example.png" class="align-center" id="virtio-test-example" src="../_images/virtio-test-example.png" />
-</div>
-<div class="section" id="id5">
-<h2>本章代码树<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>virtio-drivers crate
-<span class="linenos"> 2</span>########################
-<span class="linenos"> 3</span>./os/src
-<span class="linenos"> 4</span>Rust         8 Files    1150 Lines
-<span class="linenos"> 5</span>./examples/riscv/src
-<span class="linenos"> 6</span>Rust         2 Files     138 Lines
-<span class="linenos"> 7</span>
-<span class="linenos"> 8</span>.
-<span class="linenos"> 9</span>├── Cargo.lock
-<span class="linenos">10</span>├── Cargo.toml
-<span class="linenos">11</span>├── examples
-<span class="linenos">12</span>│   └── riscv
-<span class="linenos">13</span>│       ├── Cargo.toml
-<span class="linenos">14</span>│       ├── linker32.ld
-<span class="linenos">15</span>│       ├── linker64.ld
-<span class="linenos">16</span>│       ├── Makefile
-<span class="linenos">17</span>│       ├── rust-toolchain
-<span class="linenos">18</span>│       └── src
-<span class="linenos">19</span>│           ├── main.rs （各种virtio设备的测试用例）
-<span class="linenos">20</span>│           └── virtio_impl.rs (用于I/O数据的物理内存空间管理的简单实现)
-<span class="linenos">21</span>├── LICENSE
-<span class="linenos">22</span>├── README.md
-<span class="linenos">23</span>└── src
-<span class="linenos">24</span>   ├── blk.rs (virtio-blk 驱动)
-<span class="linenos">25</span>   ├── gpu.rs (virtio-gpu 驱动)
-<span class="linenos">26</span>   ├── hal.rs (用于I/O数据的物理内存空间管理接口)
-<span class="linenos">27</span>   ├── header.rs (VirtIOHeader: MMIO Device Register Interface)
-<span class="linenos">28</span>   ├── input.rs (virtio-input 驱动)
-<span class="linenos">29</span>   ├── lib.rs
-<span class="linenos">30</span>   ├── net.rs (virtio-net 驱动)
-<span class="linenos">31</span>   └── queue.rs (virtqueues: 批量I/O数据传输的机制)
-<span class="linenos">32</span>
-<span class="linenos">33</span>4 directories, 20 files
-</pre></div>
-</div>
-</div>
-<div class="section" id="id6">
-<h2>本章代码导读<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
-<p>本章涉及的代码主要与设备驱动相关，需要了解硬件，需要阅读和运行测试相关代码。这里简要介绍一下在内核中添加设备驱动的大致开发过程。对于设计实现设备驱动，首先需要大致了解对应设备的硬件规范。在本章中，主要有两类设备，一类是实际的物理设备 – UART（QEMU模拟了这种NS16550A UART芯片规范）；另外一类是虚拟设备（如各种Virtio设备）。</p>
-<p>然后需要了解外设是如何与CPU连接的。首先是CPU访问外设的方式，在RISC-V环境中，把外设相关的控制寄存器映射为某特定的内存区域（即MMIO映射方式），然后CPU通过读写这些特殊区域来访问外设（即PIO访问方式）。外设可以通过DMA来读写主机内存中的数据，并可通过中断来通知CPU。外设并不直接连接CPU，这就需要了解RISC-V中的平台级中断控制器（Platform-Level Interrupt Controller，PLIC），它管理并收集各种外设中断信息，并传递给CPU。</p>
-<p>对于设备驱动程序对外设的具体管理过程，大致会有初始化外设和I/O读写与控制操作。理解这些操作和对应的关键数据结构，就大致理解外设驱动要完成的功能包含哪些内容。每个设备驱动的关键数据结构和处理过程有共性部分和特定的部分。建议从 <code class="docutils literal notranslate"><span class="pre">virtio-drivers</span></code> crate 中的  <code class="docutils literal notranslate"><span class="pre">examples/riscv/src/main.rs</span></code> 这个virtio设备的功能测试例子入手来分析。</p>
-<p>以 <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 存储设备为例，可以看到，首先是访问 <code class="docutils literal notranslate"><span class="pre">OpenSBI</span></code> (这里没有用RustSBI，用的是QEMU内置的SBI实现)提供的设备树信息，了解QEMU硬件中存在的各种外设，根据外设ID来找到 <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 存储设备；找到后，就进行外设的初始化，如果学习了 virtio规范（需要关注的是 virtqueue、virtio-mmio device， virtio-blk device的描述内容），那就可以看出代码实现的初始化过程和virtio规范中的virtio设备初始化步骤基本上是一致的，但也有与具体设备相关的特定初始化内容，比如分配 I/O buffer等。初始化完毕后，设备驱动在收到上层内核发出的读写扇区/磁盘块的请求后，就能通过 <code class="docutils literal notranslate"><span class="pre">virtqueue</span></code> 传输通道发出 <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 设备能接收的I/O命令和I/O buffer的区域信息； <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 设备收到信息后，会通过DMA操作完成磁盘数据的读写，然后通过中断或其他方式让设备驱动知道命令完成或命令执行失败。而 <code class="docutils literal notranslate"><span class="pre">virtio-gpu</span></code> 设备驱动程序的设计实现与 <code class="docutils literal notranslate"><span class="pre">virtio-blk</span></code> 设备驱动程序类似。</p>
-<p>注：目前还没有提供相关的系统调用来方便应用程序访问virtio-gpu外设。</p>
-<dl class="footnote brackets">
-<dt class="label" id="juravenator"><span class="brackets"><a class="fn-backref" href="#id3">1</a></span></dt>
-<dd><p>侏罗猎龙是一种小型恐龙，生活在1亿5千万年前的侏罗纪，它有独特的鳞片状的皮肤感觉器官，具有类似鳄鱼的触觉、冷热以及pH等综合感知能力，可能对狩猎有很大帮助。</p>
-</dd>
-</dl>
-</div>
-</div>
-
-
-           </div>
-           
-          </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="1io-interface.html" class="btn btn-neutral float-right" title="I/O设备" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="index.html" class="btn btn-neutral float-left" title="第九章：I/O设备管理" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2020-2022, Yu Chen, Yifan Wu.
-
-    </p>
-  </div>
-    
-    
-    
-    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
-
-</footer>
-        </div>
-      </div>
-
-    </section>
-
-  </div>
-  
-
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
-    
-   
-
-</body>
+    <script src="../_static/translations.js"></script>
+    <script src="https://unpkg.com/mermaid@9.3.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="../_static/mermaid.js"></script>
+    </body>
 </html>

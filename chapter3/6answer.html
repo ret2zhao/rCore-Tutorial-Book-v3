@@ -1,42 +1,1254 @@
+<!doctype html>
+<html class="no-js" lang="zh_CN">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="第四章：地址空间" href="../chapter4/index.html" /><link rel="prev" title="练习" href="5exercise.html" />
 
-
-<!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
-<head>
-  <meta charset="utf-8" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>练习参考答案 &mdash; rCore-Tutorial-Book-v3 3.6.0-alpha.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
+    <meta name="generator" content="sphinx-4.3.2, furo 2022.06.21"/>
+        <title>练习参考答案 - rCore-Tutorial-Book-v3 3.6.0-alpha.1 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/my_style.css" />
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script kind="utterances">
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">rCore-Tutorial-Book-v3 3.6.0-alpha.1 文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">rCore-Tutorial-Book-v3 3.6.0-alpha.1 文档</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=搜索 name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Part1 - Just do it!</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter0/index.html">第零章：操作系统概述</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter0/0intro.html">引言</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/1what-is-os.html">什么是操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/2os-interface.html">操作系统的系统调用接口</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/3os-hw-abstract.html">操作系统抽象</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/4os-features.html">操作系统的特征</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/5setup-devel-env.html">实验环境配置</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/7exercise.html">练习</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/8answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter1/index.html">第一章：应用程序与基本执行环境</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter1/0intro.html">引言</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/1app-ee-platform.html">应用程序执行环境与平台支持</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/2remove-std.html">移除标准库依赖</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/3first-instruction-in-kernel1.html">内核第一条指令（基础篇）</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/4first-instruction-in-kernel2.html">内核第一条指令（实践篇）</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/5support-func-call.html">为内核支持函数调用</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/6print-and-shutdown-based-on-sbi.html">基于 SBI 服务完成输出和关机</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/7exercise.html">练习</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/8answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter2/index.html">第二章：批处理系统</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter2/0intro.html">引言</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter2/1rv-privilege.html">特权级机制</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter2/2application.html">实现应用程序</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter2/3batch-system.html">实现批处理操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter2/4trap-handling.html">实现特权级的切换</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter2/5exercise.html">练习</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter2/6answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">第三章：多道程序与分时多任务</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1multi-loader.html">多道程序放置与加载</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2task-switching.html">任务切换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3multiprogramming.html">多道程序与协作式调度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4time-sharing-system.html">分时多任务系统与抢占式调度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5exercise.html">练习</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">练习参考答案</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter4/index.html">第四章：地址空间</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/1rust-dynamic-allocation.html">Rust 中的动态内存分配</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/2address-space.html">地址空间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/3sv39-implementation-1.html">SV39 多级页表的硬件机制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/4sv39-implementation-2.html">管理 SV39 多级页表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/5kernel-app-spaces.html">内核与应用的地址空间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/6multitasking-based-on-as.html">基于地址空间的分时多任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/7more-as.html">超越物理内存的地址空间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/8exercise.html">练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/9answer.html">练习参考答案</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter5/index.html">第五章：进程</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/1process.html">进程概念及重要系统调用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/2core-data-structures.html">进程管理的核心数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/3implement-process-mechanism.html">进程管理机制的设计实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/4scheduling.html">进程调度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/5exercise.html">练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter5/6answer.html">练习参考答案</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter6/index.html">第六章：文件系统</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter6/0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter6/1fs-interface.html">文件系统接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter6/2fs-implementation.html">简易文件系统 easy-fs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter6/3using-easy-fs-in-kernel.html">在内核中接入 easy-fs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter6/4exercise.html">练习</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter6/5answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter7/index.html">第七章：进程间通信与 I/O 重定向</a><input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/1file-descriptor.html">基于文件的标准输入/输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/2pipe.html">管道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/3cmdargs-and-redirection.html">命令行参数与标准 I/O 重定向</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/4signal.html">信号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/5exercise.html">练习</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter7/6answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter8/index.html">第八章：并发</a><input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/1thread.html">用户态的线程管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/1thread-kernel.html">内核态的线程管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/2lock.html">互斥锁</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/3semaphore.html">信号量机制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/4condition-variable.html">条件变量机制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/5concurrency-problem.html">并发中的问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/6exercise.html">练习</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter8/7answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../chapter9/index.html">第九章：I/O设备管理</a><input class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter9/0intro.html">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter9/1io-interface.html">I/O设备</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter9/2device-driver-0.html">外设平台</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter9/2device-driver-1.html">串口驱动程序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter9/2device-driver-2.html">virtio设备驱动程序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter9/2device-driver-3.html">virtio_blk块设备驱动程序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter9/2device-driver-4.html">virtio_gpu设备驱动程序</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter9/4exercise.html">练习</a><input class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter9/5answer.html">练习参考答案</a><input class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" role="switch" type="checkbox"/><label for="toctree-checkbox-36"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../final-lab.html">综合练习</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix-a/index.html">附录 A：Rust 系统编程入门</a><input class="toctree-checkbox" id="toctree-checkbox-37" name="toctree-checkbox-37" role="switch" type="checkbox"/><label for="toctree-checkbox-37"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix-b/index.html">附录 B：常见工具的使用方法</a><input class="toctree-checkbox" id="toctree-checkbox-38" name="toctree-checkbox-38" role="switch" type="checkbox"/><label for="toctree-checkbox-38"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix-c/index.html">附录 C：深入机器模式：RustSBI</a><input class="toctree-checkbox" id="toctree-checkbox-39" name="toctree-checkbox-39" role="switch" type="checkbox"/><label for="toctree-checkbox-39"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix-d/index.html">附录 D：RISC-V相关信息</a><input class="toctree-checkbox" id="toctree-checkbox-40" name="toctree-checkbox-40" role="switch" type="checkbox"/><label for="toctree-checkbox-40"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../appendix-d/1asm.html">RISCV 汇编相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix-d/2rv.html">RISCV 硬件相关</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix-e/index.html">附录 E：操作系统进一步介绍</a><input class="toctree-checkbox" id="toctree-checkbox-41" name="toctree-checkbox-41" role="switch" type="checkbox"/><label for="toctree-checkbox-41"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-f/index.html">附录 F：类 Peterson 算法的局限性和内存顺序</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../terminology.html">术语中英文对照表</a><input class="toctree-checkbox" id="toctree-checkbox-42" name="toctree-checkbox-42" role="switch" type="checkbox"/><label for="toctree-checkbox-42"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发注记</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../setup-sphinx.html">修改和构建本项目</a><input class="toctree-checkbox" id="toctree-checkbox-43" name="toctree-checkbox-43" role="switch" type="checkbox"/><label for="toctree-checkbox-43"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rest-example.html">reStructuredText 基本语法</a><input class="toctree-checkbox" id="toctree-checkbox-44" name="toctree-checkbox-44" role="switch" type="checkbox"/><label for="toctree-checkbox-44"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../log.html">更新日志</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <div class="section" id="id1">
+<h1>练习参考答案<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
+<div class="section" id="id2">
+<h2>课后练习<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+<div class="section" id="id3">
+<h3>编程题<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h3>
+<div class="section" id="id4">
+<h4>1. 扩展内核，能够显示操作系统切换任务的过程。<a class="headerlink" href="#id4" title="永久链接至标题">#</a></h4>
+<p>切换任务是在 <code class="docutils literal notranslate"><span class="pre">task/mod.rs</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">TASK_MANAGER</span></code> 中完成的，主要靠
+<code class="docutils literal notranslate"><span class="pre">mark_current_suspended()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">mark_current_exited()</span></code>
+标记任务运行结束，<code class="docutils literal notranslate"><span class="pre">run_next_task</span></code>
+标记任务开始运行，在其中插入输出即可显示切换任务的过程（下面代码中的加入的三行
+<code class="docutils literal notranslate"><span class="pre">println!</span></code> ）</p>
+<div class="admonition caution">
+<p class="admonition-title">小心</p>
+<p><strong>03sleep.rs测例会导致频繁切换任务，使得输出过多。可以修改测例的等待时间来减少输出。</strong></p>
+</div>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="sd">/// Change the status of current `Running` task into `Ready`.</span>
+<span class="k">fn</span> <span class="nf">mark_current_suspended</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">inner</span><span class="p">.</span><span class="n">exclusive_access</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">current_task</span><span class="p">;</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;task {} suspended&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">current</span><span class="p">);</span>
+<span class="w">    </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">current</span><span class="p">].</span><span class="n">task_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TaskStatus</span>::<span class="n">Ready</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="sd">/// Change the status of current `Running` task into `Exited`.</span>
+<span class="k">fn</span> <span class="nf">mark_current_exited</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">inner</span><span class="p">.</span><span class="n">exclusive_access</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">current_task</span><span class="p">;</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;task {} exited&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">current</span><span class="p">);</span>
+<span class="w">    </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">current</span><span class="p">].</span><span class="n">task_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TaskStatus</span>::<span class="n">Exited</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="sd">/// Switch current `Running` task to the task we have found,</span>
+<span class="sd">/// or there is no `Ready` task and we can exit with all applications completed</span>
+<span class="k">fn</span> <span class="nf">run_next_task</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">find_next_task</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">inner</span><span class="p">.</span><span class="n">exclusive_access</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">current_task</span><span class="p">;</span>
+<span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;task {} start&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">current</span><span class="p">);</span>
+<span class="w">        </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">next</span><span class="p">].</span><span class="n">task_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TaskStatus</span>::<span class="n">Running</span><span class="p">;</span>
+<span class="w">        </span><span class="n">inner</span><span class="p">.</span><span class="n">current_task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">current_task_cx_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">current</span><span class="p">].</span><span class="n">task_cx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="n">TaskContext</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">next_task_cx_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">next</span><span class="p">].</span><span class="n">task_cx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="n">TaskContext</span><span class="p">;</span>
+<span class="w">        </span><span class="nb">drop</span><span class="p">(</span><span class="n">inner</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// before this, we should drop local variables that must be dropped manually</span>
+<span class="w">        </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">__switch</span><span class="p">(</span><span class="n">current_task_cx_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">next_task_cx_ptr</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// go back to user mode</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;All applications completed!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">board</span>::<span class="n">QEMUExit</span><span class="p">;</span>
+<span class="w">        </span><span class="k">crate</span>::<span class="n">board</span>::<span class="n">QEMU_EXIT_HANDLE</span><span class="p">.</span><span class="n">exit_success</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h4>2. 扩展内核，能够统计每个应用执行后的完成时间：用户态完成时间和内核态完成时间。<a class="headerlink" href="#id5" title="永久链接至标题">#</a></h4>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>如果先做了第一题，记得删掉上面的输出，并且最好复原 <code class="docutils literal notranslate"><span class="pre">03sleep.rs</span></code>（如果有修改）。</p>
+</div>
+<div class="section" id="id6">
+<h5>2.1. 如何计算时间<a class="headerlink" href="#id6" title="永久链接至标题">#</a></h5>
+<p>首先给每个 <code class="docutils literal notranslate"><span class="pre">TaskControlBlock</span></code> 加上用户时间和内核时间两个属性：</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#[derive(Copy, Clone)]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">TaskControlBlock</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">task_status</span>: <span class="nc">TaskStatus</span><span class="p">,</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">task_cx</span>: <span class="nc">TaskContext</span><span class="p">,</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">user_time</span>: <span class="kt">usize</span><span class="p">,</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">kernel_time</span>: <span class="kt">usize</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>然后在 <code class="docutils literal notranslate"><span class="pre">TaskManager</span></code> 中设置一个“停表”变量
+<code class="docutils literal notranslate"><span class="pre">stop_watch</span></code>，并通过以下方法来“掐表”：</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="sd">/// Inner of Task Manager</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">TaskManagerInner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="sd">/// task list</span>
+<span class="w">    </span><span class="n">tasks</span>: <span class="p">[</span><span class="n">TaskControlBlock</span><span class="p">;</span><span class="w"> </span><span class="n">MAX_APP_NUM</span><span class="p">],</span>
+<span class="w">    </span><span class="sd">/// id of current `Running` task</span>
+<span class="w">    </span><span class="n">current_task</span>: <span class="kt">usize</span><span class="p">,</span>
+<span class="w">    </span><span class="sd">/// 停表</span>
+<span class="w">    </span><span class="n">stop_watch</span>: <span class="kt">usize</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">TaskManagerInner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">refresh_stop_watch</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">usize</span> <span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">start_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">stop_watch</span><span class="p">;</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">stop_watch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_time_ms</span><span class="p">();</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">stop_watch</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_time</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>可以看到，这个方法每次会返回从当前到上一次“掐表”的时间间隔，然后刷新为当前时间。之后就可以利用它来统计应用执行时间了。</p>
+</div>
+<div class="section" id="id7">
+<h5>2.2. 统计内核态时间<a class="headerlink" href="#id7" title="永久链接至标题">#</a></h5>
+<p>切换内核态任务时，需要记录上一个任务的时间，并重新开始统计下一个任务的时间。</p>
+<p>在 <code class="docutils literal notranslate"><span class="pre">TaskManager</span></code> 的三个方法中插入上面的
+<code class="docutils literal notranslate"><span class="pre">refresh_stop_watch()</span></code>即可（注意中文注释的位置）</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">run_first_task</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="o">!</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">inner</span><span class="p">.</span><span class="n">exclusive_access</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">task0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">    </span><span class="n">task0</span><span class="p">.</span><span class="n">task_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TaskStatus</span>::<span class="n">Running</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">next_task_cx_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">task0</span><span class="p">.</span><span class="n">task_cx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="n">TaskContext</span><span class="p">;</span>
+<span class="w">    </span><span class="sd">/// 开始记录时间</span>
+<span class="w">    </span><span class="n">inner</span><span class="p">.</span><span class="n">refresh_stop_watch</span><span class="p">();</span>
+<span class="w">    </span><span class="nb">drop</span><span class="p">(</span><span class="n">inner</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">_unused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TaskContext</span>::<span class="n">zero_init</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// before this, we should drop local variables that must be dropped manually</span>
+<span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">__switch</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">_unused</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="n">TaskContext</span><span class="p">,</span><span class="w"> </span><span class="n">next_task_cx_ptr</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&quot;unreachable in run_first_task!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="sd">/// Change the status of current `Running` task into `Ready`.</span>
+<span class="k">fn</span> <span class="nf">mark_current_suspended</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">inner</span><span class="p">.</span><span class="n">exclusive_access</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">current_task</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 统计内核时间</span>
+<span class="w">    </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">current</span><span class="p">].</span><span class="n">kernel_time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">refresh_stop_watch</span><span class="p">();</span>
+<span class="w">    </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">current</span><span class="p">].</span><span class="n">task_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TaskStatus</span>::<span class="n">Ready</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="sd">/// Change the status of current `Running` task into `Exited`.</span>
+<span class="k">fn</span> <span class="nf">mark_current_exited</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">inner</span><span class="p">.</span><span class="n">exclusive_access</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">current_task</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 统计内核时间并输出</span>
+<span class="w">    </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">current</span><span class="p">].</span><span class="n">kernel_time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">refresh_stop_watch</span><span class="p">();</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;[task {} exited. user_time: {} ms, kernle_time: {} ms.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">current</span><span class="p">,</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">current</span><span class="p">].</span><span class="n">user_time</span><span class="p">,</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">current</span><span class="p">].</span><span class="n">kernel_time</span><span class="p">);</span>
+<span class="w">    </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">current</span><span class="p">].</span><span class="n">task_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TaskStatus</span>::<span class="n">Exited</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h5>2.3. 统计用户态时间<a class="headerlink" href="#id8" title="永久链接至标题">#</a></h5>
+<p>在 <code class="docutils literal notranslate"><span class="pre">trap</span></code> 进入退出用户态的时候，可以统计用户态的运行时间，在
+<code class="docutils literal notranslate"><span class="pre">trap_handler</span></code> 的开头结尾添加上函数 <code class="docutils literal notranslate"><span class="pre">user_time_end</span></code>
+<code class="docutils literal notranslate"><span class="pre">user_time_start</span></code>：</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="sd">/// handle an interrupt, exception, or system call from user space</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">trap_handler</span><span class="p">(</span><span class="n">cx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">TrapContext</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">TrapContext</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">crate</span>::<span class="n">task</span>::<span class="n">user_time_end</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">scause</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scause</span>::<span class="n">read</span><span class="p">();</span><span class="w"> </span><span class="c1">// get trap cause</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">stval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stval</span>::<span class="n">read</span><span class="p">();</span><span class="w"> </span><span class="c1">// get extra value</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">scause</span><span class="p">.</span><span class="n">cause</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Trap</span>::<span class="n">Exception</span><span class="p">(</span><span class="n">Exception</span>::<span class="n">UserEnvCall</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cx</span><span class="p">.</span><span class="n">sepc</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cx</span><span class="p">.</span><span class="n">x</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">syscall</span><span class="p">(</span><span class="n">cx</span><span class="p">.</span><span class="n">x</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">cx</span><span class="p">.</span><span class="n">x</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span><span class="w"> </span><span class="n">cx</span><span class="p">.</span><span class="n">x</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span><span class="w"> </span><span class="n">cx</span><span class="p">.</span><span class="n">x</span><span class="p">[</span><span class="mi">12</span><span class="p">]])</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">usize</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">Trap</span>::<span class="n">Exception</span><span class="p">(</span><span class="n">Exception</span>::<span class="n">StoreFault</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Trap</span>::<span class="n">Exception</span><span class="p">(</span><span class="n">Exception</span>::<span class="n">StorePageFault</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;[kernel] PageFault in application, bad addr = {:#x}, bad instruction = {:#x}, kernel killed it.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">stval</span><span class="p">,</span><span class="w"> </span><span class="n">cx</span><span class="p">.</span><span class="n">sepc</span><span class="p">);</span>
+<span class="w">            </span><span class="n">exit_current_and_run_next</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">Trap</span>::<span class="n">Exception</span><span class="p">(</span><span class="n">Exception</span>::<span class="n">IllegalInstruction</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;[kernel] IllegalInstruction in application, kernel killed it.&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">exit_current_and_run_next</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">Trap</span>::<span class="n">Interrupt</span><span class="p">(</span><span class="n">Interrupt</span>::<span class="n">SupervisorTimer</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">set_next_trigger</span><span class="p">();</span>
+<span class="w">            </span><span class="n">suspend_current_and_run_next</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="fm">panic!</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;Unsupported trap {:?}, stval = {:#x}!&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">scause</span><span class="p">.</span><span class="n">cause</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">stval</span>
+<span class="w">            </span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">crate</span>::<span class="n">task</span>::<span class="n">user_time_start</span><span class="p">();</span>
+<span class="w">    </span><span class="n">cx</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这两个函数的实现也很简单，在 <code class="docutils literal notranslate"><span class="pre">TaskManager</span></code> 的实现中加入：</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="sd">/// 统计内核时间，从现在开始算的是用户时间</span>
+<span class="k">fn</span> <span class="nf">user_time_start</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">inner</span><span class="p">.</span><span class="n">exclusive_access</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">current_task</span><span class="p">;</span>
+<span class="w">    </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">current</span><span class="p">].</span><span class="n">kernel_time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">refresh_stop_watch</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="sd">/// 统计用户时间，从现在开始算的是内核时间</span>
+<span class="k">fn</span> <span class="nf">user_time_end</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">inner</span><span class="p">.</span><span class="n">exclusive_access</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">current_task</span><span class="p">;</span>
+<span class="w">    </span><span class="n">inner</span><span class="p">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">current</span><span class="p">].</span><span class="n">user_time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">refresh_stop_watch</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>再在同文件 <code class="docutils literal notranslate"><span class="pre">task/mod.rs</span></code> 中包装成</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="sd">/// 统计内核时间，从现在开始算的是用户时间</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">user_time_start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">TASK_MANAGER</span><span class="p">.</span><span class="n">user_time_start</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="sd">/// 统计用户时间，从现在开始算的是内核时间</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">user_time_end</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">TASK_MANAGER</span><span class="p">.</span><span class="n">user_time_end</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>就是全部的实现了。</p>
+</div>
+<div class="section" id="id9">
+<h5>2.4. 这个实现正确吗？（重要）<a class="headerlink" href="#id9" title="永久链接至标题">#</a></h5>
+<p>上面的实现其实隐含了所有的切换情况。请考虑以下的场景：</p>
+<ol class="lowerroman simple">
+<li><p>第一个任务开始运行时：</p></li>
+</ol>
+<ul class="simple">
+<li><p>先在<code class="docutils literal notranslate"><span class="pre">run_first_task</span></code> 中刷新了停表(不统计)，随后通过 <code class="docutils literal notranslate"><span class="pre">__switch</span></code>
+跳转到 <code class="docutils literal notranslate"><span class="pre">__restore</span></code>进入用户态执行。</p></li>
+<li><p>从用户态回来后，遇到函数
+<code class="docutils literal notranslate"><span class="pre">user_time_end()</span></code>，此时刷新停表并统计用户态时间。</p></li>
+</ul>
+<ol class="lowerroman simple" start="2">
+<li><p>正常 syscall</p></li>
+</ol>
+<ul class="simple">
+<li><p>从用户态回来后，遇到函数
+<code class="docutils literal notranslate"><span class="pre">user_time_end()</span></code>，此时刷新停表并统计用户态时间。</p></li>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">trap</span></code> 结尾处遇到函数
+<code class="docutils literal notranslate"><span class="pre">user_time_start()</span></code>，刷新停表，并统计内核态时间</p></li>
+</ul>
+<ol class="lowerroman simple" start="3">
+<li><p>通过时钟中断切换任务：</p></li>
+</ol>
+<ul class="simple">
+<li><p>前一个任务从用户态回来后，遇到函数
+<code class="docutils literal notranslate"><span class="pre">user_time_end()</span></code>，此时刷新停表并统计用户态时间。</p></li>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">mark_current_suspended</span></code> 中又刷新停表，并统计内核态时间。</p></li>
+<li><p>切换到新任务后，在 <code class="docutils literal notranslate"><span class="pre">trap</span></code> 结尾处遇到函数
+<code class="docutils literal notranslate"><span class="pre">user_time_start()</span></code>，刷新停表，并统计新任务的内核态时间</p></li>
+</ul>
+<ol class="lowerroman simple" start="4">
+<li><p>任务结束</p></li>
+</ol>
+<ul class="simple">
+<li><p>从用户态回来后，遇到函数
+<code class="docutils literal notranslate"><span class="pre">user_time_end()</span></code>，此时刷新停表并统计用户态时间。</p></li>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">mark_current_exited</span></code>中又刷新停表，并统计内核态时间，然后输出</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="a">
+<h4>3. 编写浮点应用程序A，并扩展内核，支持面向浮点应用的正常切换与抢占。<a class="headerlink" href="#a" title="永久链接至标题">#</a></h4>
+<p>需要在 <code class="docutils literal notranslate"><span class="pre">trap.S</span></code> 中加入浮点寄存器组的保存和恢复指令（见中文注释处）：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">__alltraps</span><span class="p">:</span>
+    <span class="n">csrrw</span> <span class="n">sp</span><span class="p">,</span> <span class="n">sscratch</span><span class="p">,</span> <span class="n">sp</span>
+    <span class="c1"># now sp-&gt;kernel stack, sscratch-&gt;user stack</span>
+    <span class="c1"># allocate a TrapContext on kernel stack</span>
+    <span class="n">addi</span> <span class="n">sp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="o">-</span><span class="mi">34</span><span class="o">*</span><span class="mi">8</span>
+    <span class="c1"># save general-purpose registers</span>
+    <span class="n">sd</span> <span class="n">x1</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="c1"># skip sp(x2), we will save it later</span>
+    <span class="n">sd</span> <span class="n">x3</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="c1"># skip tp(x4), application does not use it</span>
+    <span class="c1"># save x5~x31</span>
+    <span class="o">.</span><span class="n">set</span> <span class="n">n</span><span class="p">,</span> <span class="mi">5</span>
+    <span class="o">.</span><span class="n">rept</span> <span class="mi">27</span>
+        <span class="n">SAVE_GP</span> <span class="o">%</span><span class="n">n</span>
+        <span class="o">.</span><span class="n">set</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span>
+    <span class="o">.</span><span class="n">endr</span>
+    <span class="c1"># we can use t0/t1/t2 freely, because they were saved on kernel stack</span>
+    <span class="n">csrr</span> <span class="n">t0</span><span class="p">,</span> <span class="n">sstatus</span>
+    <span class="n">csrr</span> <span class="n">t1</span><span class="p">,</span> <span class="n">sepc</span>
+    <span class="n">sd</span> <span class="n">t0</span><span class="p">,</span> <span class="mi">32</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="n">sd</span> <span class="n">t1</span><span class="p">,</span> <span class="mi">33</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="c1"># read user stack from sscratch and save it on the kernel stack</span>
+    <span class="n">csrr</span> <span class="n">t2</span><span class="p">,</span> <span class="n">sscratch</span>
+    <span class="c1"># 浮点寄存器</span>
+    <span class="n">fsd</span> <span class="n">fs0</span><span class="p">,</span> <span class="mi">34</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="n">fsd</span> <span class="n">fs1</span><span class="p">,</span> <span class="mi">35</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="o">......</span>
+    <span class="n">sd</span> <span class="n">t2</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="c1"># set input argument of trap_handler(cx: &amp;mut TrapContext)</span>
+    <span class="n">mv</span> <span class="n">a0</span><span class="p">,</span> <span class="n">sp</span>
+    <span class="n">call</span> <span class="n">trap_handler</span>
+
+<span class="n">__restore</span><span class="p">:</span>
+    <span class="c1"># now sp-&gt;kernel stack(after allocated), sscratch-&gt;user stack</span>
+    <span class="c1"># restore sstatus/sepc</span>
+    <span class="n">ld</span> <span class="n">t0</span><span class="p">,</span> <span class="mi">32</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="n">ld</span> <span class="n">t1</span><span class="p">,</span> <span class="mi">33</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="n">ld</span> <span class="n">t2</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="n">csrw</span> <span class="n">sstatus</span><span class="p">,</span> <span class="n">t0</span>
+    <span class="n">csrw</span> <span class="n">sepc</span><span class="p">,</span> <span class="n">t1</span>
+    <span class="n">csrw</span> <span class="n">sscratch</span><span class="p">,</span> <span class="n">t2</span>
+    <span class="c1"># restore general-purpuse registers except sp/tp</span>
+    <span class="n">ld</span> <span class="n">x1</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="n">ld</span> <span class="n">x3</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">set</span> <span class="n">n</span><span class="p">,</span> <span class="mi">5</span>
+    <span class="o">.</span><span class="n">rept</span> <span class="mi">27</span>
+        <span class="n">LOAD_GP</span> <span class="o">%</span><span class="n">n</span>
+        <span class="o">.</span><span class="n">set</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span>
+    <span class="o">.</span><span class="n">endr</span>
+    <span class="c1"># 浮点寄存器</span>
+    <span class="n">fld</span> <span class="n">fs0</span><span class="p">,</span> <span class="mi">34</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="n">fld</span> <span class="n">fs1</span><span class="p">,</span> <span class="mi">35</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="o">......</span>
+    <span class="c1"># release TrapContext on kernel stack</span>
+    <span class="n">addi</span> <span class="n">sp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="mi">34</span><span class="o">*</span><span class="mi">8</span>
+    <span class="c1"># now sp-&gt;kernel stack, sscratch-&gt;user stack</span>
+    <span class="n">csrrw</span> <span class="n">sp</span><span class="p">,</span> <span class="n">sscratch</span><span class="p">,</span> <span class="n">sp</span>
+    <span class="n">sret</span>
+</pre></div>
+</div>
+<p>此外，支持浮点指令可能还需要(包括但不限于)以下条件：</p>
+<ul>
+<li><p>机器本身支持浮点指令</p></li>
+<li><p>Rust 编译目标包含浮点指令</p>
+<ul>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">os/Makefile</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">TARGET</span> <span class="pre">:=</span> <span class="pre">riscv64gc-unknown-none-elf</span></code>
+支持浮点指令，而对应的 <code class="docutils literal notranslate"><span class="pre">riscv64imac</span></code> 则不支持。</p></li>
+<li><p>如果机器本身支持但使用<code class="docutils literal notranslate"><span class="pre">riscv64imac</span></code>作为编译目标，仍然可以通过强行插入指令的方式来支持浮点，如
+<code class="docutils literal notranslate"><span class="pre">fld</span> <span class="pre">fs0,</span> <span class="pre">280(sp)</span></code> 在 RISCV 指令集中表示为机器码 <code class="docutils literal notranslate"><span class="pre">0x2472</span></code>
+，就可以在上面的 <code class="docutils literal notranslate"><span class="pre">trap.S</span></code> 中插入</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">short</span> <span class="mh">0x2472</span> <span class="c1"># fld fs0, 280(sp)</span>
+</pre></div>
+</div>
+<p>来支持浮点指令</p>
+</li>
+</ul>
+</li>
+<li><p>需要通过控制浮点控制状态寄存器（如 <code class="docutils literal notranslate"><span class="pre">fcsr</span></code>）来检查FPU状态。详见
+<a class="reference external" href="https://five-embeddev.com/riscv-isa-manual/latest/machine.html#machine-trap-vector-base-address-register-mtvec">https://five-embeddev.com/riscv-isa-manual/latest/machine.html#machine-trap-vector-base-address-register-mtvec</a></p></li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h4>4. 编写应用程序或扩展内核，能够统计任务切换的大致开销。<a class="headerlink" href="#id10" title="永久链接至标题">#</a></h4>
+<p>所有任务切换都通过
+<code class="docutils literal notranslate"><span class="pre">__switch</span></code>，可以包装一下这个函数，统计它运行的开销。首先删除
+<code class="docutils literal notranslate"><span class="pre">task/mod.rs</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">switch::__switch</span></code>，然后加入以下函数来代替
+<code class="docutils literal notranslate"><span class="pre">__switch</span></code>：</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="sd">/// 切换的开始时间</span>
+<span class="k">static</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">SWITCH_TIME_START</span>: <span class="kt">usize</span> <span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="sd">/// 切换的总时间</span>
+<span class="k">static</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">SWITCH_TIME_COUNT</span>: <span class="kt">usize</span> <span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">__switch</span><span class="p">(</span><span class="n">current_task_cx_ptr</span>: <span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="n">TaskContext</span><span class="p">,</span><span class="w"> </span><span class="n">next_task_cx_ptr</span>: <span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="n">TaskContext</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">SWITCH_TIME_START</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_time_us</span><span class="p">();</span>
+<span class="w">    </span><span class="n">switch</span>::<span class="n">__switch</span><span class="p">(</span><span class="n">current_task_cx_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">next_task_cx_ptr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">SWITCH_TIME_COUNT</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">get_time_us</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">SWITCH_TIME_START</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">get_switch_time_count</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="kt">usize</span> <span class="p">{</span>
+<span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">SWITCH_TIME_COUNT</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">小心</p>
+<p>这里统计时间使用了一个
+<code class="docutils literal notranslate"><span class="pre">get_time_us</span></code>，即计算当前的微秒数。这是因为任务切换的时间比较短，不好用毫秒来计数。对应的实现在
+<code class="docutils literal notranslate"><span class="pre">timer.rs</span></code> 中：</p>
+</div>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">USEC_PER_SEC</span>: <span class="kt">usize</span> <span class="o">=</span><span class="w"> </span><span class="mi">1000000</span><span class="p">;</span>
+
+<span class="sd">/// get current time in milliseconds</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_time_us</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="kt">usize</span> <span class="p">{</span>
+<span class="w">    </span><span class="n">time</span>::<span class="n">rad</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">CLOCK_FREQ</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">USEC_PER_SEC</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>最后，在 <code class="docutils literal notranslate"><span class="pre">run_next_task</span></code> 中所有程序退出后，增加一条输出语句即可：</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="o">......</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;All applications completed!&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// 统计任务切换时间</span>
+<span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;task switch time: {} us&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">get_switch_time_count</span><span class="p">());</span>
+<span class="w">            </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">board</span>::<span class="n">QEMUExit</span><span class="p">;</span>
+<span class="w">            </span><span class="k">crate</span>::<span class="n">board</span>::<span class="n">QEMU_EXIT_HANDLE</span><span class="p">.</span><span class="n">exit_success</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h4>5.扩展内核，支持在内核态响应中断。<a class="headerlink" href="#id11" title="永久链接至标题">#</a></h4>
+<p>内核开关中断的控制主要涉及<code class="docutils literal notranslate"><span class="pre">sstatus</span></code>寄存器的两个位：</p>
+<ul>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">sie</span></code> 位可开关中断，如使用</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">riscv</span>::<span class="n">register</span>::<span class="n">sstatus</span><span class="p">;</span>
+<span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">sstatus</span>::<span class="n">set_sie</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// 打开内核态中断</span>
+<span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">sstatus</span>::<span class="n">clear_sie</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// 关闭内核态中断</span>
+</pre></div>
+</div>
+</li>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">spp</span></code> 位可以分辨中断的来源。现在<strong>将原本的
+``trap/mod.rs:trap_handler()`` 改名为 ``user_trap_handler()``，
+并增加一个新的 ``trap_handler()`` 函数</strong>：</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#[no_mangle]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">trap_handler</span><span class="p">(</span><span class="n">cx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">TrapContext</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">TrapContext</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">sstatus</span>::<span class="n">read</span><span class="p">().</span><span class="n">spp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">sstatus</span>::<span class="n">SPP</span>::<span class="n">Supervisor</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">kernel_trap_handler</span><span class="p">(</span><span class="n">cx</span><span class="p">),</span>
+<span class="w">        </span><span class="n">sstatus</span>::<span class="n">SPP</span>::<span class="n">User</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">user_trap_handler</span><span class="p">(</span><span class="n">cx</span><span class="p">),</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>从上面的函数可以看出，我们还需要额外在 <code class="docutils literal notranslate"><span class="pre">trap/mod.rs</span></code> 写一个
+<code class="docutils literal notranslate"><span class="pre">kernel_trap_handler</span></code> 来处理内核中断：</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="sd">/// 处理内核异常和中断</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">kernel_trap_handler</span><span class="p">(</span><span class="n">cx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">TrapContext</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">TrapContext</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">scause</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scause</span>::<span class="n">read</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">stval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stval</span>::<span class="n">read</span><span class="p">();</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">scause</span><span class="p">.</span><span class="n">cause</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Trap</span>::<span class="n">Interrupt</span><span class="p">(</span><span class="n">Interrupt</span>::<span class="n">SupervisorTimer</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 内核中断来自一个时钟中断</span>
+<span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;kernel interrupt: from timer&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// 标记一下触发了中断</span>
+<span class="w">            </span><span class="n">mark_kernel_interrupt</span><span class="p">();</span>
+<span class="w">            </span><span class="n">set_next_trigger</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">Trap</span>::<span class="n">Exception</span><span class="p">(</span><span class="n">Exception</span>::<span class="n">StoreFault</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Trap</span>::<span class="n">Exception</span><span class="p">(</span><span class="n">Exception</span>::<span class="n">StorePageFault</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&quot;[kernel] PageFault in kernel, bad addr = {:#x}, bad instruction = {:#x}, kernel killed it.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">stval</span><span class="p">,</span><span class="w"> </span><span class="n">cx</span><span class="p">.</span><span class="n">sepc</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 其他的内核异常/中断</span>
+<span class="w">            </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&quot;unknown kernel exception or interrupt&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">cx</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>其中和用户态的中断实现大致相同，但异常和中断没有写全，可以后续补充。值得注意的有以下几点：</p>
+<ul class="simple">
+<li><p>在函数中不使用 <code class="docutils literal notranslate"><span class="pre">clear_sie</span> <span class="pre">/</span> <span class="pre">set_sie</span></code>
+来开关中断，这是因为虽然我们在<code class="docutils literal notranslate"><span class="pre">main.rs</span></code>的测试中打开了中断，但
+<code class="docutils literal notranslate"><span class="pre">RISC-V</span></code> 会自动在中断触发时关闭 <code class="docutils literal notranslate"><span class="pre">sstatus.SIE</span></code>，在
+<code class="docutils literal notranslate"><span class="pre">sret</span></code>返回时打开
+<code class="docutils literal notranslate"><span class="pre">sstatus.SIE</span></code>。<strong>在内核中需要小心打开中断的时机</strong>。例如触发中断时，内核正在拿着一些
+mutex 锁，那么它在 <code class="docutils literal notranslate"><span class="pre">trap_handler</span></code>
+中处理时一旦尝试拿锁，就可能自己跟自己造成死锁。</p></li>
+<li><p>在收到时钟中断时，输出了内容并调用了
+<code class="docutils literal notranslate"><span class="pre">mark_kernel_interrupt</span></code>。这和中断机制无关，只是在<code class="docutils literal notranslate"><span class="pre">trap/mod.rs</span></code>
+中增加了一个全局变量，用于检查是否成功触发了内核中断</p></li>
+</ul>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">KERNEL_INTERRUPT_TRIGGERED</span>: <span class="kt">bool</span> <span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+
+<span class="sd">/// 检查内核中断是否触发</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">check_kernel_interrupt</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span>
+<span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">KERNEL_INTERRUPT_TRIGGERED</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="kt">bool</span><span class="p">).</span><span class="n">read_volatile</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="sd">/// 标记内核中断已触发</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">trigger_kernel_interrupt</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">KERNEL_INTERRUPT_TRIGGERED</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="kt">bool</span><span class="p">).</span><span class="n">write_volatile</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>相对应的，在 <code class="docutils literal notranslate"><span class="pre">main.rs</span></code> 中，我们在 <code class="docutils literal notranslate"><span class="pre">timer::set_next_trigger()</span></code>
+之后，在开始用户程序的 <code class="docutils literal notranslate"><span class="pre">task::run_first_task();</span></code>
+之前加了一段测试程序：</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">rust_main</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="o">!</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">clear_bss</span><span class="p">();</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;[kernel] Hello, world!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">trap</span>::<span class="n">init</span><span class="p">();</span>
+<span class="w">    </span><span class="n">loader</span>::<span class="n">load_apps</span><span class="p">();</span>
+<span class="w">    </span><span class="n">trap</span>::<span class="n">enable_timer_interrupt</span><span class="p">();</span>
+<span class="w">    </span><span class="n">timer</span>::<span class="n">set_next_trigger</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">use</span><span class="w"> </span><span class="n">riscv</span>::<span class="n">register</span>::<span class="n">sstatus</span><span class="p">;</span>
+<span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">sstatus</span>::<span class="n">set_sie</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// 打开内核态中断</span>
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">trap</span>::<span class="n">check_kernel_interrupt</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;kernel interrupt returned.&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">sstatus</span>::<span class="n">clear_sie</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// 关闭内核态中断</span>
+<span class="w">    </span><span class="n">task</span>::<span class="n">run_first_task</span><span class="p">();</span>
+<span class="w">    </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&quot;Unreachable in rust_main!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>但修改上面的代码后还无法通过编译，<strong>因为真正的“中断入口处理”是在
+``trap.S`` 中的汇编代码，如果它不做任何处理</strong>：</p>
+<ul>
+<li><p>一个内核中断进入原本的 <code class="docutils literal notranslate"><span class="pre">trap.S</span></code> 代码时，它会首先遇到
+<code class="docutils literal notranslate"><span class="pre">csrrw</span> <span class="pre">sp,</span> <span class="pre">sscratch,</span> <span class="pre">sp</span></code></p>
+<ul>
+<li><p>按上面的测试，此时还没有进入用户程序，那么交换后 sp 为 0。</p>
+<p><code class="docutils literal notranslate"><span class="pre">trap.S</span></code> 下面的代码是增长栈并尝试保存寄存器：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">__alltraps</span><span class="p">:</span>
+    <span class="n">csrrw</span> <span class="n">sp</span><span class="p">,</span> <span class="n">sscratch</span><span class="p">,</span> <span class="n">sp</span>
+    <span class="c1"># now sp-&gt;kernel stack, sscratch-&gt;user stack</span>
+    <span class="c1"># allocate a TrapContext on kernel stack</span>
+    <span class="n">addi</span> <span class="n">sp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="o">-</span><span class="mi">34</span><span class="o">*</span><span class="mi">8</span>
+    <span class="c1"># save general-purpose registers</span>
+    <span class="n">sd</span> <span class="n">x1</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>在<code class="docutils literal notranslate"><span class="pre">addi</span></code>指令后， sp 会被写成 <code class="docutils literal notranslate"><span class="pre">0xfffffffffffffef8</span></code>；在
+<code class="docutils literal notranslate"><span class="pre">sd</span></code>
+指令时，因为写入地址不合法（整个内核都在<code class="docutils literal notranslate"><span class="pre">0x80200000</span></code>附近）会触发
+<code class="docutils literal notranslate"><span class="pre">StorePageFault</span></code></p>
+</li>
+</ul>
+</li>
+<li><ul class="simple">
+<li><p>由于触发<code class="docutils literal notranslate"><span class="pre">StorePageFault</span></code>，此时又会进入
+<code class="docutils literal notranslate"><span class="pre">__alltraps</span></code>，于是内核在这几条语句上死循环了</p></li>
+</ul>
+</li>
+</ul>
+<p>如果进入用户程序后，在用户程序的内核态触发内核中断，那么此时会把用户态的栈交换到
+<code class="docutils literal notranslate"><span class="pre">sp</span></code> 寄存器，并在用户态的栈里写内核信息。这也是不可接受的错误。</p>
+<p>因此，我们需要<strong>在 ``trap.S``
+内陷入和返回时做出判断，如果是内核中断异常则不换栈，如果是用户中断异常则通过
+``csrrw sp, sscratch, sp`` 换栈</strong></p>
+<p>将 <code class="docutils literal notranslate"><span class="pre">__alltrap</span></code> 的开头改为：</p>
+<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nl">__alltraps:</span>
+<span class="w">    </span><span class="nf">csrr</span><span class="w"> </span><span class="no">tp</span><span class="p">,</span><span class="w"> </span><span class="no">sstatus</span>
+<span class="w">    </span><span class="nf">andi</span><span class="w"> </span><span class="no">tp</span><span class="p">,</span><span class="w"> </span><span class="no">tp</span><span class="p">,</span><span class="w"> </span><span class="mi">0x100</span>
+<span class="w">    </span><span class="nf">beqz</span><span class="w"> </span><span class="no">tp</span><span class="p">,</span><span class="w"> </span><span class="no">__user_trap_start</span>
+<span class="w">    </span><span class="nf">j</span><span class="w"> </span><span class="no">__real_trap_entry</span>
+
+<span class="nl">__user_trap_start:</span>
+<span class="w">    </span><span class="nf">csrrw</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="no">sscratch</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span>
+
+<span class="nl">__real_trap_entry:</span>
+<span class="w">    </span><span class="c1"># now sp-&gt;kernel stack, sscratch-&gt;user stack</span>
+<span class="w">    </span><span class="c1"># allocate a TrapContext on kernel stack</span>
+<span class="w">    </span><span class="nf">addi</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="mi">-34</span><span class="p">*</span><span class="mi">8</span>
+<span class="w">    </span><span class="na">......</span>
+</pre></div>
+</div>
+<p>这段代码等价于取出<code class="docutils literal notranslate"><span class="pre">sstatus</span></code>寄存器的
+<code class="docutils literal notranslate"><span class="pre">spp</span></code>位做判断，如果为0则是用户态中断，否则是内核态中断。类似地，在中断返回时也要做一次判断。将
+<code class="docutils literal notranslate"><span class="pre">__restore</span></code> 改为：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">__restore</span><span class="p">:</span>
+    <span class="c1"># now sp-&gt;kernel stack(after allocated), sscratch-&gt;user stack</span>
+    <span class="c1"># restore sstatus/sepc</span>
+    <span class="n">ld</span> <span class="n">t0</span><span class="p">,</span> <span class="mi">32</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="n">ld</span> <span class="n">t1</span><span class="p">,</span> <span class="mi">33</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="n">ld</span> <span class="n">t2</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="n">csrw</span> <span class="n">sstatus</span><span class="p">,</span> <span class="n">t0</span>
+    <span class="n">csrw</span> <span class="n">sepc</span><span class="p">,</span> <span class="n">t1</span>
+    <span class="n">csrw</span> <span class="n">sscratch</span><span class="p">,</span> <span class="n">t2</span>
+    <span class="c1"># get SPP</span>
+    <span class="n">andi</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="mh">0x100</span>
+    <span class="n">bnez</span> <span class="n">t0</span><span class="p">,</span> <span class="n">__kernel_trap_end</span>
+
+<span class="n">__user_trap_end</span><span class="p">:</span>
+    <span class="c1"># restore general-purpuse registers except sp/tp</span>
+    <span class="n">ld</span> <span class="n">x1</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="n">ld</span> <span class="n">x3</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">set</span> <span class="n">n</span><span class="p">,</span> <span class="mi">5</span>
+    <span class="o">.</span><span class="n">rept</span> <span class="mi">27</span>
+        <span class="n">LOAD_GP</span> <span class="o">%</span><span class="n">n</span>
+        <span class="o">.</span><span class="n">set</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span>
+    <span class="o">.</span><span class="n">endr</span>
+    <span class="c1"># release TrapContext on kernel stack</span>
+    <span class="n">addi</span> <span class="n">sp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="mi">34</span><span class="o">*</span><span class="mi">8</span>
+    <span class="c1"># now sp-&gt;kernel stack, sscratch-&gt;user stack</span>
+    <span class="n">csrrw</span> <span class="n">sp</span><span class="p">,</span> <span class="n">sscratch</span><span class="p">,</span> <span class="n">sp</span>
+    <span class="n">sret</span>
+
+<span class="n">__kernel_trap_end</span><span class="p">:</span>
+    <span class="c1"># restore general-purpuse registers except sp/tp</span>
+    <span class="n">ld</span> <span class="n">x1</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="n">ld</span> <span class="n">x3</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">set</span> <span class="n">n</span><span class="p">,</span> <span class="mi">5</span>
+    <span class="o">.</span><span class="n">rept</span> <span class="mi">27</span>
+        <span class="n">LOAD_GP</span> <span class="o">%</span><span class="n">n</span>
+        <span class="o">.</span><span class="n">set</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span>
+    <span class="o">.</span><span class="n">endr</span>
+    <span class="c1"># release TrapContext on kernel stack</span>
+    <span class="n">addi</span> <span class="n">sp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="mi">34</span><span class="o">*</span><span class="mi">8</span>
+    <span class="n">sret</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">小心</p>
+<p>注意返回时需要先获取中断来源信息再恢复寄存器。</p>
+</div>
+<p>以上就是内核中断的一个基本实现了，但还不具备实用价值，真正利用内核中断还需要扩展
+<code class="docutils literal notranslate"><span class="pre">kernel_trap_handler</span></code> 函数，支持更有意义的中断类型。</p>
+<div class="section" id="id12">
+<h5>如何在不破坏寄存器的情况下检查中断来源<a class="headerlink" href="#id12" title="永久链接至标题">#</a></h5>
+<p>在上面的代码实现中，在陷入 <code class="docutils literal notranslate"><span class="pre">__alltrap</span></code> 时利用了 <code class="docutils literal notranslate"><span class="pre">tp</span></code> 寄存器来检查
+<code class="docutils literal notranslate"><span class="pre">sstatus</span></code>的<code class="docutils literal notranslate"><span class="pre">SPP</span></code> 信息，这样原本<code class="docutils literal notranslate"><span class="pre">tp</span></code>
+寄存器的信息就丢失了。但后续也有很多方法可以避免这个问题：</p>
+<ul>
+<li><p>在
+<code class="docutils literal notranslate"><span class="pre">rCore-Tutorial</span></code>本章节中，内核栈和用户栈都直接写在<code class="docutils literal notranslate"><span class="pre">loader.rs</span></code>
+中。但在实际的内核中，用户空间往往在低地址（<code class="docutils literal notranslate"><span class="pre">0x00000......</span></code>），而内核空间在高地址（<code class="docutils literal notranslate"><span class="pre">0xfffff......</span></code>）。</p>
+<p>可以利用这一点，把 <code class="docutils literal notranslate"><span class="pre">sp</span></code>
+看作有符号整数，如果它是负数则是内核栈地址，代表内核态发的中断；如果它是正数则是用户栈地址，代表用户态发的中断。即：</p>
+<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nl">__alltraps:</span>
+<span class="w">    </span><span class="nf">bgtz</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="no">__user_trap_start</span>
+<span class="w">    </span><span class="nf">j</span><span class="w"> </span><span class="no">__real_trap_entry</span>
+
+<span class="nl">__user_trap_start:</span>
+<span class="w">    </span><span class="nf">csrrw</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="no">sscratch</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span>
+
+<span class="nl">__real_trap_entry:</span>
+<span class="w">    </span><span class="c1"># now sp-&gt;kernel stack, sscratch-&gt;user stack</span>
+<span class="w">    </span><span class="c1"># allocate a TrapContext on kernel stack</span>
+<span class="w">    </span><span class="nf">addi</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="mi">-34</span><span class="p">*</span><span class="mi">8</span>
+<span class="w">    </span><span class="na">......</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>这样就可以规避目前代码中丢失 <code class="docutils literal notranslate"><span class="pre">tp</span></code> 寄存器的问题。</p>
+<ul class="simple">
+<li><p>另一种方法是扩展 <code class="docutils literal notranslate"><span class="pre">sscratch</span></code> 的定义。目前 <code class="docutils literal notranslate"><span class="pre">sscratch</span></code>
+只用于用户栈和内核栈的交换，可以使它表示一个专门的页或者中间栈或者处理函数，在其中完成寄存器的保存，再安全地用寄存器检查中断来源。</p></li>
+</ul>
+<p>注：上述扩展内核的编程基于 rcore/ucore tutorial v3: Branch ch3</p>
+</div>
+</div>
+</div>
+<div class="section" id="id13">
+<h3>问答题<a class="headerlink" href="#id13" title="永久链接至标题">#</a></h3>
+<ol class="arabic">
+<li><p><cite>*</cite> 协作式调度与抢占式调度的区别是什么？</p>
+<p>协作式调度中，进程主动放弃 (yield) 执行资源，暂停运行，将占用的资源让给其它进程；抢占式调度中，进程会被强制打断暂停，释放资源让给别的进程。</p>
+</li>
+<li><p><cite>*</cite> 中断、异常和系统调用有何异同之处？</p>
+<ul class="simple">
+<li><p>相同点</p>
+<ul>
+<li><p>都会从通常的控制流中跳出，进入 trap handler 进行处理。</p></li>
+</ul>
+</li>
+<li><p>不同点</p>
+<ul>
+<li><p>中断的来源是异步的外部事件，由外设、时钟、别的 hart 等外部来源，与 CPU 正在做什么没关系。</p></li>
+<li><p>异常是 CPU 正在执行的指令遇到问题无法正常进行而产生的。</p></li>
+<li><p>系统调用是程序有意想让操作系统帮忙执行一些操作，用专门的指令（如 <code class="docutils literal notranslate"><span class="pre">ecall</span></code> ）触发的。</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><cite>*</cite> RISC-V支持哪些中断/异常？</p></li>
+</ol>
+<p>见下图</p>
+<img alt="../_images/interrupts.png" src="../_images/interrupts.png" />
+<ol class="arabic simple" start="4">
+<li><p><cite>*</cite> 如何判断进入操作系统内核的起因是由于中断还是异常？</p></li>
+</ol>
+<p>检查 mcause 寄存器的最高位，1 表示中断，0 表示异常。</p>
+<p>当然在 Rust 中也可以直接利用 <code class="docutils literal notranslate"><span class="pre">riscv</span></code> 库提供的接口判断：</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="n">scause</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scause</span>::<span class="n">read</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">scause</span><span class="p">.</span><span class="n">is_interrupt</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">do_something</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">scause</span><span class="p">.</span><span class="n">is_exception</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">do_something</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>又或者，可以按照 <code class="docutils literal notranslate"><span class="pre">trap/mod.rs:trap_handler()</span></code> 中的写法，用
+<code class="docutils literal notranslate"><span class="pre">match</span> <span class="pre">scause.cause()</span></code> 来判断。</p>
+<ol class="arabic" start="5">
+<li><p><cite>**</cite> 在 RISC-V 中断机制中，PLIC 和 CLINT 各起到了什么作用？</p>
+<p>CLINT 处理时钟中断 (<code class="docutils literal notranslate"><span class="pre">MTI</span></code>) 和核间的软件中断 (<code class="docutils literal notranslate"><span class="pre">MSI</span></code>)；PLIC 处理外部来源的中断 (<code class="docutils literal notranslate"><span class="pre">MEI</span></code>)。</p>
+<p>PLIC 的规范文档： <a class="reference external" href="https://github.com/riscv/riscv-plic-spec">https://github.com/riscv/riscv-plic-spec</a></p>
+</li>
+<li><p><cite>**</cite> 基于RISC-V 的操作系统支持中断嵌套？请给出进一步的解释说明。</p></li>
+</ol>
+<p>RISC-V原生不支持中断嵌套。(在S态的内核中)只有 <code class="docutils literal notranslate"><span class="pre">sstatus</span></code> 的 <code class="docutils literal notranslate"><span class="pre">SIE</span></code>
+位为 1 时，才会开启中断，再由 <code class="docutils literal notranslate"><span class="pre">sie</span></code>
+寄存器控制哪些中断可以触发。触发中断时，<code class="docutils literal notranslate"><span class="pre">sstatus.SPIE</span></code> 置为
+<code class="docutils literal notranslate"><span class="pre">sstatus.SIE</span></code>，而 <code class="docutils literal notranslate"><span class="pre">sstatus.SIE</span></code> 置为0；当执行 <code class="docutils literal notranslate"><span class="pre">sret</span></code>
+时，<code class="docutils literal notranslate"><span class="pre">sstatus.SIE</span></code>置为 <code class="docutils literal notranslate"><span class="pre">sstatus.SPIE</span></code>，而 <code class="docutils literal notranslate"><span class="pre">sstatus.SPIE</span></code>
+置为1。这意味着触发中断时，因为 <code class="docutils literal notranslate"><span class="pre">sstatus.SIE</span></code>
+为0，所以无法再次触发中断。</p>
+<ol class="arabic simple" start="7">
+<li><p><cite>**</cite> 本章提出的任务的概念与前面提到的进程的概念之间有何区别与联系？</p>
+<ul class="simple">
+<li><p>联系：任务和进程都有自己独立的栈、上下文信息，任务是进程的“原始版本”，在第五章会将目前的用户程序从任务升级为进程。</p></li>
+<li><p>区别：任务之间没有地址空间隔离，实际上是能相互访问到的；进程之间有地址空间隔离，一个进程无法访问到另一个进程的地址。</p></li>
+</ul>
+</li>
+<li><p><cite>*</cite> 简单描述一下任务的地址空间中有哪些类型的数据和代码。</p></li>
+</ol>
+<p>可参照 <code class="docutils literal notranslate"><span class="pre">user/src/linker.ld</span></code>：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.text</span></code>：任务的代码段，其中开头的 <code class="docutils literal notranslate"><span class="pre">.text.entry</span></code>
+段包含任务的入口地址</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.rodata</span></code>：只读数据，包含字符串常量，如测例中的
+<code class="docutils literal notranslate"><span class="pre">println!(&quot;Test</span> <span class="pre">power_3</span> <span class="pre">OK!&quot;);</span></code> 实际打印的字符串存在这里</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.data</span></code>：需要初始化的全局变量</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.bss</span></code>：未初始化或初始为0的全局变量。</p></li>
+<li><ul>
+<li><p>在之后第四章的
+<code class="docutils literal notranslate"><span class="pre">user/src/bin/00power_3.rs</span></code>中，会把第三章中在用户栈上定义的数组移到全局变量中<code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">mut</span> <span class="pre">S:</span> <span class="pre">[u64;</span> <span class="pre">LEN]</span> <span class="pre">=</span> <span class="pre">[0u64;</span> <span class="pre">LEN];</span></code></p></li>
+<li><p>在第五章的 <code class="docutils literal notranslate"><span class="pre">user/lib.rs</span></code>中，会在 <code class="docutils literal notranslate"><span class="pre">bss</span></code> 段构造一个用户堆
+<code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">mut</span> <span class="pre">HEAP_SPACE:</span> <span class="pre">[u8;</span> <span class="pre">USER_HEAP_SIZE]</span> <span class="pre">=</span> <span class="pre">[0;</span> <span class="pre">USER_HEAP_SIZE];</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>除此之外，在内核中为每个任务构造的用户栈
+<code class="docutils literal notranslate"><span class="pre">os/src/loader.rs:USER_STACK</span></code>也属于各自任务的地址。</p>
+<ol class="arabic simple" start="9">
+<li><p><cite>*</cite> 任务控制块保存哪些内容？</p></li>
+</ol>
+<p>在本章中，任务控制块即 <code class="docutils literal notranslate"><span class="pre">os/src/task/task.rs:TaskControlBlock</span></code>
+保存任务目前的执行状态 <code class="docutils literal notranslate"><span class="pre">task_status</span></code> 和任务上下文 <code class="docutils literal notranslate"><span class="pre">task_cx</span></code>。</p>
+<ol class="arabic" start="10">
+<li><p><cite>*</cite> 任务上下文切换需要保存与恢复哪些内容？</p>
+<p>需要保存通用寄存器的值，PC；恢复的时候除了保存的内容以外还要恢复特权级到用户态。</p>
+</li>
+<li><p><cite>*</cite> 特权级上下文和任务上下文有何异同？</p></li>
+</ol>
+<ul class="simple">
+<li><p>相同点：特权级上下文和任务上下文都保留了一组寄存器，都代表一个“执行流”</p></li>
+<li><p>不同点：</p></li>
+<li><ul>
+<li><p>特权级上下文切换可以发生在中断异常时，所以它不符合函数调用约定，需要保存所有通用寄存器。同时它又涉及特权级切换，所以还额外保留了一些
+CSR，在切换时还会涉及更多的 CSR。</p></li>
+<li><p>任务上下文由内核手动触发，它包装在
+<code class="docutils literal notranslate"><span class="pre">os/src/task/switch.rs:__switch()</span></code>
+里，所以除了“返回函数与调用函数不同”之外，它符合函数调用约定，只需要保存通用寄存器中
+<code class="docutils literal notranslate"><span class="pre">callee</span></code>
+类型的寄存器。为了满足切换执行流时“返回函数与调用函数不同”的要求，它还额外保存
+<code class="docutils literal notranslate"><span class="pre">ra</span></code>。</p></li>
+</ul>
+</li>
+</ul>
+<ol class="arabic" start="12">
+<li><p><cite>*</cite> 上下文切换为什么需要用汇编语言实现？</p>
+<p>上下文切换过程中，需要我们直接控制所有的寄存器。C 和 Rust 编译器在编译代码的时候都会“自作主张”使用通用寄存器，以及我们不知道的情况下访问栈，这是我们需要避免的。</p>
+<p>切换到内核的时候，保存好用户态状态之后，我们将栈指针指向内核栈，相当于构建好一个高级语言可以正常运行的环境，这时候就可以由高级语言接管了。</p>
+</li>
+<li><p><cite>*</cite> 有哪些可能的时机导致任务切换？</p>
+<p>系统调用（包括进程结束执行）、时钟中断。</p>
+</li>
+<li><p><cite>**</cite> 在设计任务控制块时，为何采用分离的内核栈和用户栈，而不用一个栈？</p>
+<p>用户程序可以任意修改栈指针，将其指向任意位置，而内核在运行的时候总希望在某一个合法的栈上，所以需要用分开的两个栈。</p>
+<p>此外，利用后面的章节的知识可以保护内核和用户栈，让用户无法读写内核栈上的内容，保证安全。</p>
+</li>
+<li><p><cite>***</cite> （以下答案以 Linux 5.17 为准）</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arch/riscv/kernel/entry.S</span></code> 里的 <code class="docutils literal notranslate"><span class="pre">handle_exception</span></code> ； <code class="docutils literal notranslate"><span class="pre">arch/riscv/kernel/head.S</span></code> 里的 <code class="docutils literal notranslate"><span class="pre">setup_trap_vector</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arch/riscv/kernel/entry.S</span></code> 里的 <code class="docutils literal notranslate"><span class="pre">__switch_to</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TrapContext</span></code> 对应 <code class="docutils literal notranslate"><span class="pre">pt_regs</span></code> ； <code class="docutils literal notranslate"><span class="pre">TaskContext</span></code> 对应 <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> （在 <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> 中也包含一些其它的和调度相关的信息）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tp</span></code> 指向当前被打断的任务的 <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> （参见 <code class="docutils literal notranslate"><span class="pre">arch/riscv/include/asm/current.h</span></code> 里的宏 <code class="docutils literal notranslate"><span class="pre">current</span></code> ）； <code class="docutils literal notranslate"><span class="pre">sscratch</span></code> 是 <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sscratch</span></code> 指向当前正在运行的任务的 <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> ，这样设计可以用来区分异常来自用户态还是内核态。</p></li>
+<li><p>所有通用寄存器， <code class="docutils literal notranslate"><span class="pre">sstatus</span></code>, <code class="docutils literal notranslate"><span class="pre">sepc</span></code>, <code class="docutils literal notranslate"><span class="pre">scause</span></code></p></li>
+<li><p>内核栈底； <code class="docutils literal notranslate"><span class="pre">arch/riscv/include/asm/processor.h</span></code> 里的 <code class="docutils literal notranslate"><span class="pre">task_pt_regs</span></code> 宏</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arch/riscv/kernel/syscall_table.c</span></code> 里的 <code class="docutils literal notranslate"><span class="pre">sys_call_table</span></code> 作为跳转表，根据系统调用编号调用。</p></li>
+<li><p>从保存的 <code class="docutils literal notranslate"><span class="pre">pt_regs</span></code> 中读保存的 <code class="docutils literal notranslate"><span class="pre">a0</span></code> 到 <code class="docutils literal notranslate"><span class="pre">a7</span></code> 到机器寄存器里，这样系统调用实现的 C 函数就会作为参数接收到这些值，返回值是将返回的 <code class="docutils literal notranslate"><span class="pre">a0</span></code> 写入保存的 <code class="docutils literal notranslate"><span class="pre">pt_regs</span></code> ，然后切换回用户态的代码负责将其“恢复”到 <code class="docutils literal notranslate"><span class="pre">a0</span></code></p></li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../chapter4/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">第四章：地址空间</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="5exercise.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">练习</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2020-2022, Yu Chen, Yifan Wu
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            目录
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">练习参考答案</a><ul>
+<li><a class="reference internal" href="#id2">课后练习</a><ul>
+<li><a class="reference internal" href="#id3">编程题</a><ul>
+<li><a class="reference internal" href="#id4">1. 扩展内核，能够显示操作系统切换任务的过程。</a></li>
+<li><a class="reference internal" href="#id5">2. 扩展内核，能够统计每个应用执行后的完成时间：用户态完成时间和内核态完成时间。</a><ul>
+<li><a class="reference internal" href="#id6">2.1. 如何计算时间</a></li>
+<li><a class="reference internal" href="#id7">2.2. 统计内核态时间</a></li>
+<li><a class="reference internal" href="#id8">2.3. 统计用户态时间</a></li>
+<li><a class="reference internal" href="#id9">2.4. 这个实现正确吗？（重要）</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#a">3. 编写浮点应用程序A，并扩展内核，支持面向浮点应用的正常切换与抢占。</a></li>
+<li><a class="reference internal" href="#id10">4. 编写应用程序或扩展内核，能够统计任务切换的大致开销。</a></li>
+<li><a class="reference internal" href="#id11">5.扩展内核，支持在内核态响应中断。</a><ul>
+<li><a class="reference internal" href="#id12">如何在不破坏寄存器的情况下检查中断来源</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13">问答题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script kind="utterances">
 
     var commentsRunWhenDOMLoaded = cb => {
     if (document.readyState != 'loading') {
@@ -70,299 +1282,9 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
-        <script src="../_static/translations.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
-    <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="第四章：地址空间" href="../chapter4/index.html" />
-    <link rel="prev" title="练习" href="5exercise.html" /> 
-</head>
-
-<body class="wy-body-for-nav">
-
-   
-  <div class="wy-grid-for-nav">
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../index.html" class="icon icon-home"> rCore-Tutorial-Book-v3
-          
-
-          
-          </a>
-
-          
-            
-            
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="在文档中搜索" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption" role="heading"><span class="caption-text">Part1 - Just do it!</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../chapter0/index.html">第零章：操作系统概述</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter1/index.html">第一章：应用程序与基本执行环境</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">第二章：批处理系统</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">第三章：多道程序与分时多任务</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="0intro.html">引言</a></li>
-<li class="toctree-l2"><a class="reference internal" href="1multi-loader.html">多道程序放置与加载</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2task-switching.html">任务切换</a></li>
-<li class="toctree-l2"><a class="reference internal" href="3multiprogramming.html">多道程序与协作式调度</a></li>
-<li class="toctree-l2"><a class="reference internal" href="4time-sharing-system.html">分时多任务系统与抢占式调度</a></li>
-<li class="toctree-l2"><a class="reference internal" href="5exercise.html">练习</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">练习参考答案</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">课后练习</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3">编程题</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">问答题</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">第四章：地址空间</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">第五章：进程</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">第六章：文件系统</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">第七章：进程间通信与 I/O 重定向</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter8/index.html">第八章：并发</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter9/index.html">第九章：I/O设备管理</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">附录</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../final-lab.html">综合练习</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Rust 系统编程入门</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：常见工具的使用方法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：深入机器模式：RustSBI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：RISC-V相关信息</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：操作系统进一步介绍</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../terminology.html">术语中英文对照表</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">开发注记</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../setup-sphinx.html">修改和构建本项目</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rest-example.html">reStructuredText 基本语法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../log.html">更新日志</a></li>
-</ul>
-
-            
-          
-        </div>
-        
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">rCore-Tutorial-Book-v3</a>
-        
-      </nav>
-
-
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="index.html">第三章：多道程序与分时多任务</a> &raquo;</li>
-        
-      <li>练习参考答案</li>
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../_sources/chapter3/6answer.rst.txt" rel="nofollow"> 查看页面源码</a>
-          
-        
-      </li>
-    
-  </ul>
-
-  
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-            
-  <div class="section" id="id1">
-<h1>练习参考答案<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<div class="section" id="id2">
-<h2>课后练习<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id3">
-<h3>编程题<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
-<ol class="arabic simple">
-<li><p><cite>*</cite> 扩展内核，能够显示操作系统切换任务的过程。</p></li>
-<li><p><cite>**</cite> 扩展内核，能够统计每个应用执行后的完成时间：用户态完成时间和内核态完成时间。</p></li>
-<li><p><cite>**</cite> 编写浮点应用程序A，并扩展内核，支持面向浮点应用的正常切换与抢占。</p></li>
-<li><p><cite>**</cite> 编写应用程序或扩展内核，能够统计任务切换的大致开销。</p></li>
-<li><p><cite>***</cite> 扩展内核，支持在内核态响应中断。</p></li>
-<li><p><cite>***</cite> 扩展内核，支持在内核运行的任务（简称内核任务），并支持内核任务的抢占式切换。</p></li>
-</ol>
-<p>注：上述扩展内核的编程基于 rcore/ucore tutorial v3: Branch ch3</p>
-</div>
-<div class="section" id="id4">
-<h3>问答题<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
-<ol class="arabic">
-<li><p><cite>*</cite> 协作式调度与抢占式调度的区别是什么？</p>
-<p>协作式调度中，进程主动放弃 (yield) 执行资源，暂停运行，将占用的资源让给其它进程；抢占式调度中，进程会被强制打断暂停，释放资源让给别的进程。</p>
-</li>
-<li><p><cite>*</cite> 中断、异常和系统调用有何异同之处？</p>
-<ul class="simple">
-<li><p>相同点</p>
-<ul>
-<li><p>都会从通常的控制流中跳出，进入 trap handler 进行处理。</p></li>
-</ul>
-</li>
-<li><p>不同点</p>
-<ul>
-<li><p>中断的来源是异步的外部事件，由外设、时钟、别的 hart 等外部来源，与 CPU 正在做什么没关系。</p></li>
-<li><p>异常是 CPU 正在执行的指令遇到问题无法正常进行而产生的。</p></li>
-<li><p>系统调用是程序有意想让操作系统帮忙执行一些操作，用专门的指令（如 <code class="docutils literal notranslate"><span class="pre">ecall</span></code> ）触发的。</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><cite>*</cite> RISC-V支持哪些中断/异常？</p></li>
-<li><p><cite>*</cite> 如何判断进入操作系统内核的起因是由于中断还是异常？</p></li>
-<li><p><cite>**</cite> 在 RISC-V 中断机制中，PLIC 和 CLINT 各起到了什么作用？</p>
-<p>CLINT 处理时钟中断 (<code class="docutils literal notranslate"><span class="pre">MTI</span></code>) 和核间的软件中断 (<code class="docutils literal notranslate"><span class="pre">MSI</span></code>)；PLIC 处理外部来源的中断 (<code class="docutils literal notranslate"><span class="pre">MEI</span></code>)。</p>
-<p>PLIC 的规范文档： <a class="reference external" href="https://github.com/riscv/riscv-plic-spec">https://github.com/riscv/riscv-plic-spec</a></p>
-</li>
-<li><p><cite>**</cite> 基于RISC-V 的操作系统支持中断嵌套？请给出进一步的解释说明。</p></li>
-<li><p><cite>**</cite> 本章提出的任务的概念与前面提到的进程的概念之间有何区别与联系？</p></li>
-<li><p><cite>*</cite> 简单描述一下任务的地址空间中有哪些类型的数据和代码。</p></li>
-<li><p><cite>*</cite> 任务控制块保存哪些内容？</p></li>
-<li><p><cite>*</cite> 任务上下文切换需要保存与恢复哪些内容？</p>
-<p>需要保存通用寄存器的值，PC；恢复的时候除了保存的内容以外还要恢复特权级到用户态。</p>
-</li>
-<li><p><cite>*</cite> 特权级上下文和任务上下文有何异同？</p></li>
-<li><p><cite>*</cite> 上下文切换为什么需要用汇编语言实现？</p>
-<p>上下文切换过程中，需要我们直接控制所有的寄存器。C 和 Rust 编译器在编译代码的时候都会“自作主张”使用通用寄存器，以及我们不知道的情况下访问栈，这是我们需要避免的。</p>
-<p>切换到内核的时候，保存好用户态状态之后，我们将栈指针指向内核栈，相当于构建好一个高级语言可以正常运行的环境，这时候就可以由高级语言接管了。</p>
-</li>
-<li><p><cite>*</cite> 有哪些可能的时机导致任务切换？</p>
-<p>系统调用（包括进程结束执行）、时钟中断。</p>
-</li>
-<li><p><cite>**</cite> 在设计任务控制块时，为何采用分离的内核栈和用户栈，而不用一个栈？</p>
-<p>用户程序可以任意修改栈指针，将其指向任意位置，而内核在运行的时候总希望在某一个合法的栈上，所以需要用分开的两个栈。</p>
-<p>此外，利用后面的章节的知识可以保护内核和用户栈，让用户无法读写内核栈上的内容，保证安全。</p>
-</li>
-<li><p><cite>***</cite> （以下答案以 Linux 5.17 为准）</p>
-<ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">arch/riscv/kernel/entry.S</span></code> 里的 <code class="docutils literal notranslate"><span class="pre">handle_exception</span></code> ； <code class="docutils literal notranslate"><span class="pre">arch/riscv/kernel/head.S</span></code> 里的 <code class="docutils literal notranslate"><span class="pre">setup_trap_vector</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">arch/riscv/kernel/entry.S</span></code> 里的 <code class="docutils literal notranslate"><span class="pre">__switch_to</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">TrapContext</span></code> 对应 <code class="docutils literal notranslate"><span class="pre">pt_regs</span></code> ； <code class="docutils literal notranslate"><span class="pre">TaskContext</span></code> 对应 <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> （在 <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> 中也包含一些其它的和调度相关的信息）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tp</span></code> 指向当前被打断的任务的 <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> （参见 <code class="docutils literal notranslate"><span class="pre">arch/riscv/include/asm/current.h</span></code> 里的宏 <code class="docutils literal notranslate"><span class="pre">current</span></code> ）； <code class="docutils literal notranslate"><span class="pre">sscratch</span></code> 是 <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sscratch</span></code> 指向当前正在运行的任务的 <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> ，这样设计可以用来区分异常来自用户态还是内核态。</p></li>
-<li><p>所有通用寄存器， <code class="docutils literal notranslate"><span class="pre">sstatus</span></code>, <code class="docutils literal notranslate"><span class="pre">sepc</span></code>, <code class="docutils literal notranslate"><span class="pre">scause</span></code></p></li>
-<li><p>内核栈底； <code class="docutils literal notranslate"><span class="pre">arch/riscv/include/asm/processor.h</span></code> 里的 <code class="docutils literal notranslate"><span class="pre">task_pt_regs</span></code> 宏</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">arch/riscv/kernel/syscall_table.c</span></code> 里的 <code class="docutils literal notranslate"><span class="pre">sys_call_table</span></code> 作为跳转表，根据系统调用编号调用。</p></li>
-<li><p>从保存的 <code class="docutils literal notranslate"><span class="pre">pt_regs</span></code> 中读保存的 <code class="docutils literal notranslate"><span class="pre">a0</span></code> 到 <code class="docutils literal notranslate"><span class="pre">a7</span></code> 到机器寄存器里，这样系统调用实现的 C 函数就会作为参数接收到这些值，返回值是将返回的 <code class="docutils literal notranslate"><span class="pre">a0</span></code> 写入保存的 <code class="docutils literal notranslate"><span class="pre">pt_regs</span></code> ，然后切换回用户态的代码负责将其“恢复”到 <code class="docutils literal notranslate"><span class="pre">a0</span></code></p></li>
-</ol>
-</li>
-</ol>
-</div>
-</div>
-</div>
-
-
-           </div>
-           
-          </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../chapter4/index.html" class="btn btn-neutral float-right" title="第四章：地址空间" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="5exercise.html" class="btn btn-neutral float-left" title="练习" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2020-2022, Yu Chen, Yifan Wu.
-
-    </p>
-  </div>
-    
-    
-    
-    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
-
-</footer>
-        </div>
-      </div>
-
-    </section>
-
-  </div>
-  
-
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
-    
-   
-
-</body>
+    <script src="../_static/translations.js"></script>
+    <script src="https://unpkg.com/mermaid@9.3.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="../_static/mermaid.js"></script>
+    </body>
 </html>
